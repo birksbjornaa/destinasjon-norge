@@ -2,14 +2,14 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
 
-import BC_Logo from "../assets/profile.jpg";
+import BC_Logo from "../assets/LogoDestinasjonNorge.png";
 // resize logo
 // import { useWindowSize } from 'react-use';
 
 const Logo = () => {
   return (
     <div>
-      <img src={BC_Logo} width={25} height={25} alt="BC_Logo" />
+      <img src={BC_Logo} width={125} height={125} alt="BC_Logo" />
     </div>
   )
 }

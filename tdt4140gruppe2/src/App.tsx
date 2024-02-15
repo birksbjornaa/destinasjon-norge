@@ -6,11 +6,11 @@ function App() {
   return (
     <div className="App">
       <Home/>
-      <Header
+      {/* <Header
         myProfile="det bilde vi vil ha som bruker" // Erstatt med stien til ditt profilbilde
         homeButton="logoOgTittel" // Erstatt med stien til din hjem-logo
         onClick={handleHeaderClick}
-      />
+      /> */}
     </div>
   );
 }

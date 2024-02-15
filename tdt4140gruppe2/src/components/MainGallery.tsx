@@ -8,7 +8,7 @@ const destinations = [
   // Add more destinations as needed
 ];
 
-const Gallery: React.FC = () => {
+const MainGallery: React.FC = () => {
   return (
     <div className="gallery">
       {destinations.map((destination, index) => (
@@ -18,4 +18,4 @@ const Gallery: React.FC = () => {
   );
 };
 
-export default Gallery;
+export default MainGallery;

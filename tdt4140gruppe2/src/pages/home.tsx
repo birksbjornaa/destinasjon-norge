@@ -6,7 +6,9 @@ import profile from '../assets/profile.jpg';
 import { Nav } from "react-bootstrap";
 import NavBar from "../components/NavBar";
 import MainText from "../components/MainText";
-import Gallery from "../components/Gallery";
+import MainGallery from "../components/MainGallery";
+import SubHeader from "../components/SubHeader";
+import SubList from "../components/SubList";
 
 export default function Home() {
   const messageRef = useRef<HTMLInputElement>(null);
@@ -50,7 +52,11 @@ export default function Home() {
     <div>
       <NavBar />
       {/* <MainText /> */}
-      <Gallery />
+      <MainGallery />
+      <SubHeader string = 'Mest populære' />
+      <SubList />
+      <SubHeader string = 'Anbefalt' />
+      <SubList />
     </div>
   )
 }

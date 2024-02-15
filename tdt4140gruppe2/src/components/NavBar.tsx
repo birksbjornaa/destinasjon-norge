@@ -1,9 +1,8 @@
-import React from "react";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
 
-import BC_Logo from "../assets/BC_Logo_.png";
+import BC_Logo from "../assets/profile.jpg";
 // resize logo
 // import { useWindowSize } from 'react-use';
 

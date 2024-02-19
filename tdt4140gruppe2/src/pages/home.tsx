@@ -1,8 +1,8 @@
 import { addDoc, collection } from "@firebase/firestore";
-import { SyntheticEvent, useRef } from 'react';
+import { SyntheticEvent, useRef } from "react";
 import { firestore } from "../components/firebaseConfig";
 import Header from "../components/Header";
-import profile from '../assets/profile.jpg';
+import profile from "../assets/profile.jpg";
 import { Nav } from "react-bootstrap";
 import NavBar from "../components/NavBar";
 import MainText from "../components/MainText";
@@ -10,10 +10,11 @@ import MainGallery from "../components/MainGallery";
 import SubHeader from "../components/SubHeader";
 import SubList from "../components/SubList";
 import "../css/Main.css";
+import { destinationsDemoData } from "../components/DemoData";
 
 export default function Home() {
   const messageRef = useRef<HTMLInputElement>(null);
-  const ref = collection(firestore,"messages");
+  const ref = collection(firestore, "messages");
 
   const handleSave = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -49,20 +50,15 @@ export default function Home() {
   //   </div>
   // );
 
-  return(
-    <div className="grid-container">
-    <NavBar />
-    <MainGallery />
-    <div className="grid-inner-container">
-      <div className="subsection">
-        <SubHeader string='Mest populære' />
-        <SubList />
-      </div>
-      <div className="subsection">
-        <SubHeader string='Anbefalt' />
-        <SubList />
-      </div>
+  return (
+    <div className="homepage">
+      <NavBar />
+      {/* <MainText /> */}
+      <MainGallery destinations={destinationsDemoData} />
+      <SubHeader string="Mest populære" />
+      <SubList />
+      <SubHeader string="Anbefalt" />
+      <SubList />
     </div>
-  </div>
-  )
+  );
 }

@@ -1,8 +1,7 @@
 import "../css/Main.css";
-import profile from '../assets/profile.jpg'
-import React, { useState } from 'react';
-import  {Dropdown, Navbar, Container} from 'react-bootstrap';
-
+import profile from "../assets/profile.jpg";
+import React, { useState } from "react";
+import { Dropdown, Navbar, Container } from "react-bootstrap";
 
 import BC_Logo from "../assets/LogoDestinasjonNorge.png";
 // resize logo
@@ -13,8 +12,8 @@ const Logo = () => {
     <div>
       <img src={BC_Logo} width={125} height={125} alt="BC_Logo" />
     </div>
-  )
-}
+  );
+};
 
 //enkel måte å style en komponent på
 // import styled from "styled-components";
@@ -40,9 +39,6 @@ const Logo = () => {
     )
 } */
 
-
-
-
 const NavBar: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -58,9 +54,15 @@ const NavBar: React.FC = () => {
         </button>
         {showMenu && (
           <div className="menu">
-            <button onClick={() => console.log('Navigating to Home')}>Home</button>
-            <button onClick={() => console.log('Navigating to Profile')}>Profile</button>
-            <button onClick={() => console.log('Navigating to Settings')}>Settings</button>
+            <button onClick={() => console.log("Navigating to Home")}>
+              Home
+            </button>
+            <button onClick={() => console.log("Navigating to Profile")}>
+              Profile
+            </button>
+            <button onClick={() => console.log("Navigating to Settings")}>
+              Settings
+            </button>
           </div>
         )}
       </Container>
@@ -68,13 +70,13 @@ const NavBar: React.FC = () => {
   );
 };
 
-
 export default NavBar;
 
-
-{/* <ul>
+{
+  /* <ul>
     <Logo />
     <li>Home</li>
     <li>Profile</li>
     <li>Settings</li>
-</ul> */}
+</ul> */
+}

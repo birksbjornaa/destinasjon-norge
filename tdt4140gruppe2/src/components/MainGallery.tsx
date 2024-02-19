@@ -1,22 +1,41 @@
-import React from 'react';
-import Destination from './Destination';
+import React, { useState } from "react";
+import Destination, { DestinationProps } from "./Destination";
 import "../css/Main.css";
 
+// Move this to Destination?
 
-const destinations = [
-  { name: 'Destination 1', image: '../assets/profile.jpg' },
-  { name: 'Destination 2', image: 'image2.jpg' },
-  { name: 'Destination 3', image: 'image3.jpg' },
-  // Add more destinations as needed
-];
+export interface MainGalleryProps {
+  destinations: DestinationProps[];
+}
 
+const MainGallery: React.FC<MainGalleryProps> = ({ destinations }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const numberOfDestinationsShown = 3;
 
-const MainGallery: React.FC = () => {
+  const goLeft = () => {
+    setCurrentIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
+  };
+
+  const goRight = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex < destinations.length - 3
+        ? prevIndex + 1
+        : destinations.length - numberOfDestinationsShown
+    );
+  };
+
   return (
     <div className="maingallery">
-      {destinations.map((destination, index) => (
-        <Destination key={index} name={destination.name} src={destination.image} />
-      ))}
+      <button onClick={goLeft}>{"<"}</button>
+      {destinations
+        .slice(currentIndex, currentIndex + numberOfDestinationsShown)
+        .map((destination) => (
+          <Destination
+            name={destination.name}
+            imageSrc={destination.imageSrc}
+          />
+        ))}
+      <button onClick={goRight}>{">"}</button>
     </div>
   );
 };

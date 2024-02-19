@@ -61,19 +61,18 @@
 
 
 .maingallery {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     flex-wrap: wrap; /* Elementene vil gå til neste rad når de ikke får plass */
     gap: 20px; /* Legger til et mellomrom mellom elementene */
     align-items: center;
     justify-content: center; /* Sentrere elementene horisontalt */
     height: 300px;
-
 }
 
 .sublist{
     width: 45vw;
     justify-content: center;
-
 }
 
 .sublist ul {
@@ -103,3 +102,7 @@
     height: 25px;
     margin-right: 10px;
 }
+/*.homepage{
+     display: flex;
+    flex-direction: row; 
+} */

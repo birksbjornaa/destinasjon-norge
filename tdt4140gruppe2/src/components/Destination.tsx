@@ -1,12 +1,12 @@
-interface Props {
+export interface DestinationProps {
   name: string;
-  src: string;
+  imageSrc: string;
 }
 
-function Destination({ name, src }: Props) {
+function Destination({ name, imageSrc }: DestinationProps) {
   return (
     <div className="Destination">
-      <img src={src}></img>
+      <img src={imageSrc}></img>
       <span>{name}</span>
     </div>
   );

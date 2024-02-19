@@ -1,6 +1,7 @@
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
 import "../css/Main.css";
+import profile from '../assets/profile.jpg'
+import React, { useState } from 'react';
+import  {Dropdown, Navbar, Container} from 'react-bootstrap';
 
 
 import BC_Logo from "../assets/LogoDestinasjonNorge.png";
@@ -23,7 +24,7 @@ const Logo = () => {
 // `
 
 //make horizontal navbar with logo and buttons
-const NavBar = () => {
+/* const NavBar = () => {
     return (
       <Navbar>
       <Container className="navbar-container">
@@ -37,7 +38,36 @@ const NavBar = () => {
       </Container>
     </Navbar>
     )
-}
+} */
+
+
+
+
+const NavBar: React.FC = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMenu = () => setShowMenu(!showMenu);
+
+  return (
+    <Navbar>
+      <Container className="navbar-container">
+        <Logo />
+        <h1>Destinasjon Norge</h1>
+        <button onClick={toggleMenu} id="menu-toggle">
+          <img src={profile} width={50} height={50} alt="Profile" />
+        </button>
+        {showMenu && (
+          <div className="menu">
+            <button onClick={() => console.log('Navigating to Home')}>Home</button>
+            <button onClick={() => console.log('Navigating to Profile')}>Profile</button>
+            <button onClick={() => console.log('Navigating to Settings')}>Settings</button>
+          </div>
+        )}
+      </Container>
+    </Navbar>
+  );
+};
+
 
 export default NavBar;
 

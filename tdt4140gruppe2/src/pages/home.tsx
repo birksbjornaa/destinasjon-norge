@@ -9,6 +9,7 @@ import MainText from "../components/MainText";
 import MainGallery from "../components/MainGallery";
 import SubHeader from "../components/SubHeader";
 import SubList from "../components/SubList";
+import "../css/Main.css";
 
 export default function Home() {
   const messageRef = useRef<HTMLInputElement>(null);
@@ -32,7 +33,7 @@ export default function Home() {
   const handleHomeClick = () => {
     // Logikken for å navigere tilbake til hjemmesiden
   };
-  
+
   // return (
   //   <div>
   //      <Header
@@ -49,14 +50,19 @@ export default function Home() {
   // );
 
   return(
-    <div>
-      <NavBar />
-      {/* <MainText /> */}
-      <MainGallery />
-      <SubHeader string = 'Mest populære' />
-      <SubList />
-      <SubHeader string = 'Anbefalt' />
-      <SubList />
+    <div className="grid-container">
+    <NavBar />
+    <MainGallery />
+    <div className="grid-inner-container">
+      <div className="subsection">
+        <SubHeader string='Mest populære' />
+        <SubList />
+      </div>
+      <div className="subsection">
+        <SubHeader string='Anbefalt' />
+        <SubList />
+      </div>
     </div>
+  </div>
   )
 }

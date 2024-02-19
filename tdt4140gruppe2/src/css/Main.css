@@ -1,0 +1,105 @@
+.body{
+    width:90%;
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: column; /* Elementene plasseres i kolonner */
+    gap: 20px;
+    width:90vw;
+
+}
+
+.grid-inner-container {
+    display: flex;
+    gap: 20px;
+    width:100%;
+
+}
+
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Plasserer elementene jevnt langs hovedaksen */
+    height: 100px;
+    position: fixed;
+    top: 5%;
+    width: 90vw;
+
+}
+
+.navbar-logo {
+    margin-right: 20px;
+    width: 125px;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.navbar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center; /* Sentrere elementene vertikalt */
+}
+
+.navbar-nav li {
+    margin-right: 10px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.navbar h1 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+    font-family:cursive;
+}
+
+
+.maingallery {
+    display: flex;
+    flex-wrap: wrap; /* Elementene vil gå til neste rad når de ikke får plass */
+    gap: 20px; /* Legger til et mellomrom mellom elementene */
+    align-items: center;
+    justify-content: center; /* Sentrere elementene horisontalt */
+    height: 300px;
+
+}
+
+.sublist{
+    width: 45vw;
+    justify-content: center;
+
+}
+
+.sublist ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.sublist li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.sublist li img {
+    margin-right: 10px;
+}
+
+.sublist img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}

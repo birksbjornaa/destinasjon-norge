@@ -1,5 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
+import "../css/Main.css";
 
 
 import BC_Logo from "../assets/LogoDestinasjonNorge.png";
@@ -24,14 +25,17 @@ const Logo = () => {
 //make horizontal navbar with logo and buttons
 const NavBar = () => {
     return (
-        <Navbar>
-          <Container>
-            <Logo />
-            <li>Home</li>
-            <li>Profile</li>
-            <li>Settings</li>
-          </Container>
-        </Navbar> 
+      <Navbar>
+      <Container className="navbar-container">
+        <Logo />
+        <h1>Destinasjon Norge</h1>
+        <ul className="navbar-nav">
+          <li className="nav-item">Home</li>
+          <li className="nav-item">Profile</li>
+          <li className="nav-item">Settings</li>
+        </ul>
+      </Container>
+    </Navbar>
     )
 }
 

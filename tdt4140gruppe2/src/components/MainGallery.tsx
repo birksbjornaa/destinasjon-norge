@@ -1,5 +1,7 @@
 import React from 'react';
 import Destination from './Destination';
+import "../css/Main.css";
+
 
 const destinations = [
   { name: 'Destination 1', image: '../assets/profile.jpg' },
@@ -8,9 +10,10 @@ const destinations = [
   // Add more destinations as needed
 ];
 
+
 const MainGallery: React.FC = () => {
   return (
-    <div className="gallery">
+    <div className="maingallery">
       {destinations.map((destination, index) => (
         <Destination key={index} name={destination.name} src={destination.image} />
       ))}

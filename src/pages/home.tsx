@@ -1,39 +1,27 @@
-import { addDoc, collection } from "@firebase/firestore";
-import { SyntheticEvent, useRef } from "react";
-import { firestore } from "../components/firebaseConfig";
-import Header from "../components/Header";
-import profile from "../assets/profile.jpg";
-import { Nav } from "react-bootstrap";
 import NavBar from "../components/NavBar";
-import MainText from "../components/MainText";
 import MainGallery from "../components/MainGallery";
 import SubHeader from "../components/SubHeader";
 import SubList from "../components/SubList";
 import "../css/Main.css";
-import { destinationsDemoData } from "../components/DemoData";
+import { getAllDestinations } from "../controllers/fierbaseController";
+import { DestinationProps } from "../components/GalleryDestination";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const messageRef = useRef<HTMLInputElement>(null);
-  const ref = collection(firestore, "messages");
+  const [destinations, setDestinations] = useState<DestinationProps[]>([]);
 
-  const handleSave = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    console.log(messageRef.current?.value);
+  useEffect(() => {
+    fetchAndSetData();
+  }, []);
 
-    let data = {
-      message: messageRef.current?.value,
-    };
-
-    try {
-      addDoc(ref, data);
-    } catch (e) {
-      console.log(e);
-    }
+  const fetchAndSetData = async () => {
+    const destinations = await getAllDestinations();
+    setDestinations(destinations);
   };
 
-  const handleHomeClick = () => {
-    // Logikken for å navigere tilbake til hjemmesiden
-  };
+  //const handleHomeClick = () => {
+  // Logikken for å navigere tilbake til hjemmesiden
+  //};
 
   // return (
   //   <div>
@@ -54,7 +42,7 @@ export default function Home() {
     <div className="homepage">
       <NavBar />
       {/* <MainText /> */}
-      <MainGallery destinations={destinationsDemoData} />
+      <MainGallery destinations={destinations} />
       <SubHeader string="Mest populære" />
       <SubList />
       <SubHeader string="Anbefalt" />

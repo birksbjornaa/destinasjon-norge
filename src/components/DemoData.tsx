@@ -1,4 +1,4 @@
-import { DestinationProps } from "./Destination";
+import { DestinationProps } from "./GalleryDestination";
 
 export const destinationsDemoData: DestinationProps[] = [
   {

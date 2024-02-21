@@ -1,4 +1,4 @@
-import "./App.css";
+
 import Home from "./pages/home";
 import DestinationChooser from "./pages/DestinationChooser";
 

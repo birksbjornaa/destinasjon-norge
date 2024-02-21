@@ -12,6 +12,7 @@ function SubHeader({string}: {string: string}) {
     return (
         <div>
             <h2>{string}</h2>
+            <br></br>
         </div>
     )
 }

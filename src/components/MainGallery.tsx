@@ -6,9 +6,10 @@ import "../css/Main.css";
 
 export interface MainGalleryProps {
   destinations: DestinationProps[];
+  showArrows?: boolean;
 }
 
-const MainGallery: React.FC<MainGalleryProps> = ({ destinations }) => {
+const MainGallery: React.FC<MainGalleryProps> = ({ destinations, showArrows = true }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const numberOfDestinationsShown = 3;
 
@@ -26,16 +27,17 @@ const MainGallery: React.FC<MainGalleryProps> = ({ destinations }) => {
 
   return (
     <div className="maingallery">
-      <button onClick={goLeft}>{"<"}</button>
+      {showArrows && <button onClick={goLeft}>{"<"}</button>}
       {destinations
         .slice(currentIndex, currentIndex + numberOfDestinationsShown)
         .map((destination) => (
           <Destination
+            key={destination.name} // Husk å legge til en nøkkel for hver destinasjon
             name={destination.name}
             imageSrc={destination.imageSrc}
           />
         ))}
-      <button onClick={goRight}>{">"}</button>
+      {showArrows && <button onClick={goRight}>{">"}</button>}
     </div>
   );
 };

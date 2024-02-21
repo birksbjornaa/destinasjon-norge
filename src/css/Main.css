@@ -1,15 +1,29 @@
-.body{
-    width:90%;
+body{
+    align-items: center;
+    
+    /* margin: 0px;
+    padding: 0px; */
+}
+
+/* .image {
+  width: 400px;
+  height: 300px;
+} */
+
+button {
+  width: 30px;
 }
 
 .navbar-container {
     display: flex;
+    background-color: rgb(203, 216, 182);
     align-items: center;
     justify-content: space-between; /* Plasserer elementene jevnt langs hovedaksen */
     height: 100px;
-    position: fixed;
-    top: 5%;
-    width: 90vw;
+    position: static;
+    margin-bottom: 50px;
+    padding-top: 5px;
+    padding: 5px;
 
 }
 
@@ -41,6 +55,20 @@
     flex-grow: 1;
     text-align: center;
     font-family:cursive;
+    font-size: 40px;
+}
+
+#menu-toggle {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+#menuimg {
+    width: 120%;
 }
 
 
@@ -54,12 +82,16 @@
     height: 300px;
 }
 
+.maingallery-button {
+    width: 10px;
+}
+
 .sublist{
     width: 45vw;
     justify-content: center;
 }
 
-.sublist ul {
+/* .sublist ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -75,7 +107,7 @@
     align-items: center;
     justify-content: center;
 
-}
+} */
 
 .sublist li img {
     margin-right: 10px;
@@ -94,8 +126,10 @@
   }
 
 .destination-image {
-    width: 400px; /* Endre bredden etter ønske */
-    height: 300px; /* Endre høyden etter ønske */
+    /* width: 400px; */
+    max-width: 100%; /* Endre bredden etter ønske */
+    /* height: 300px;
+    max-height: 100%; */
     object-fit: cover; /* Behold proporsjonene og beskjær bildet om nødvendig */
   }
 
@@ -103,3 +137,4 @@
     display: block;
     margin-top: 5px;
   }
+

@@ -4,7 +4,6 @@ import { firestore } from "../components/firebaseConfig";
 import NavBar from "../components/NavBar";
 import MainGallery from "../components/MainGallery";
 import SubHeader from "../components/SubHeader";
-import SubList from "../components/SubList";
 import "../css/Main.css";
 import { destinationsDemoData } from "../components/DemoData";
 
@@ -33,13 +32,21 @@ export default function Home() {
 
   return (
     <div className="homepage">
-      <NavBar />
+      <div>
+        <NavBar />
+      </div>
       {/* <MainText /> */}
-      <MainGallery destinations={destinationsDemoData} />
-      <SubHeader string="Mest populære" />
-      <SubList />
-      <SubHeader string="Anbefalt" />
-      <SubList />
+      <div className="mainDestinations">
+        <MainGallery destinations={destinationsDemoData} />
+      </div>
+      <div className="popularDestinations">
+        <SubHeader string="Mest populære" />
+        <MainGallery destinations={destinationsDemoData} showArrows={false} /> {/** Legg inn data her */}
+      </div>
+      <div className="recommendedDestinations">
+        <SubHeader string="Vi anbefaler" />
+        <MainGallery destinations={destinationsDemoData} showArrows={false}/> {/** Legg inn data her */}
+      </div>
     </div>
   );
 }

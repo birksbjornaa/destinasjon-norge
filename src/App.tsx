@@ -1,16 +1,18 @@
-import './App.css';
-import Home from './pages/home';
-import Header from './components/Header';
+import "./App.css";
+import Home from "./pages/home";
+import DestinationChooser from "./pages/DestinationChooser";
+
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Home/>
-      {/* <Header
-        myProfile="det bilde vi vil ha som bruker" // Erstatt med stien til ditt profilbilde
-        homeButton="logoOgTittel" // Erstatt med stien til din hjem-logo
-        onClick={handleHeaderClick}
-      /> */}
+      <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/destination" element={<DestinationChooser />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

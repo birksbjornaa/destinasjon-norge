@@ -2,22 +2,6 @@
     width:90%;
 }
 
-.grid-container {
-    display: flex;
-    flex-direction: column; /* Elementene plasseres i kolonner */
-    gap: 20px;
-    width:90vw;
-
-}
-
-.grid-inner-container {
-    display: flex;
-    gap: 20px;
-    width:100%;
-
-}
-
-
 .navbar-container {
     display: flex;
     align-items: center;
@@ -102,7 +86,20 @@
     height: 25px;
     margin-right: 10px;
 }
-/*.homepage{
-     display: flex;
-    flex-direction: row; 
-} */
+
+
+.Destination {
+    margin-top: 20%;
+    text-align: center;
+  }
+
+.destination-image {
+    width: 400px; /* Endre bredden etter ønske */
+    height: 300px; /* Endre høyden etter ønske */
+    object-fit: cover; /* Behold proporsjonene og beskjær bildet om nødvendig */
+  }
+
+.destination-name {
+    display: block;
+    margin-top: 5px;
+  }

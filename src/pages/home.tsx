@@ -41,11 +41,19 @@ export default function Home() {
       </div>
       <div className="popularDestinations">
         <SubHeader string="Mest populære" />
-        <MainGallery destinations={destinationsDemoData} showArrows={false} /> {/** Legg inn data her */}
+        <MainGallery
+          destinations={destinationsDemoData}
+          showArrows={false}
+        />{" "}
+        {/** Legg inn data her */}
       </div>
       <div className="recommendedDestinations">
         <SubHeader string="Vi anbefaler" />
-        <MainGallery destinations={destinationsDemoData} showArrows={false}/> {/** Legg inn data her */}
+        <MainGallery
+          destinations={destinationsDemoData}
+          showArrows={false}
+        />{" "}
+        {/** Legg inn data her */}
       </div>
     </div>
   );

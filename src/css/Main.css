@@ -1,7 +1,7 @@
-body{
-    align-items: center;
-    
-    /* margin: 0px;
+body {
+  align-items: center;
+
+  /* margin: 0px;
     padding: 0px; */
 }
 
@@ -15,80 +15,105 @@ button {
 }
 
 .navbar-container {
-    display: flex;
-    background-color: rgb(203, 216, 182);
-    align-items: center;
-    justify-content: space-between; /* Plasserer elementene jevnt langs hovedaksen */
-    height: 100px;
-    position: static;
-    margin-bottom: 50px;
-    padding-top: 5px;
-    padding: 5px;
-
+  display: flex;
+  background-color: rgb(203, 216, 182);
+  align-items: center;
+  justify-content: space-between; /* Plasserer elementene jevnt langs hovedaksen */
+  height: 100px;
+  position: static;
+  margin-bottom: 50px;
+  padding-top: 5px;
+  padding: 5px;
 }
 
 .navbar-logo {
-    margin-right: 20px;
-    width: 125px;
+  margin-right: 20px;
+  width: 125px;
 }
 
 .navbar-nav {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .navbar-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center; /* Sentrere elementene vertikalt */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center; /* Sentrere elementene vertikalt */
 }
 
 .navbar-nav li {
-    margin-right: 10px;
-    cursor: pointer;
-    align-items: center;
+  margin-right: 10px;
+  cursor: pointer;
+  align-items: center;
 }
 
 .navbar h1 {
-    margin: 0;
-    flex-grow: 1;
-    text-align: center;
-    font-family:cursive;
-    font-size: 40px;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+  font-family: cursive;
+  font-size: 40px;
 }
 
 #menu-toggle {
-    width: 35px;
-    height: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin-right: 30px;
+}
+
+ul li button {
+  width: 70px;
+  height: 35px;
+  margin: 2px;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  padding: 10px;
+  z-index: 1000;
+  list-style: none;
+  margin-right: 100px;
+  margin: 0;
+  transform: translateX(-30%);
+  border: solid black;
+  background-color: lightgray;
+  border-radius: 5px;
+  margin-top: 4px;
+}
+
+#dropdown {
+  position: relative;
 }
 
 #menuimg {
-    width: 120%;
+  width: 120%;
 }
 
-
 .maingallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    flex-wrap: wrap; /* Elementene vil gå til neste rad når de ikke får plass */
-    gap: 20px; /* Legger til et mellomrom mellom elementene */
-    align-items: center;
-    justify-content: center; /* Sentrere elementene horisontalt */
-    height: 300px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  flex-wrap: wrap; /* Elementene vil gå til neste rad når de ikke får plass */
+  gap: 20px; /* Legger til et mellomrom mellom elementene */
+  align-items: center;
+  justify-content: center; /* Sentrere elementene horisontalt */
+  height: 300px;
 }
 
 .maingallery-button {
-    width: 10px;
+  width: 10px;
 }
 
-.sublist{
-    width: 45vw;
-    justify-content: center;
+.sublist {
+  width: 45vw;
+  justify-content: center;
 }
 
 /* .sublist ul {
@@ -110,31 +135,30 @@ button {
 } */
 
 .sublist li img {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .sublist img {
-    width: 25px;
-    height: 25px;
-    margin-right: 10px;
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
 }
 
-
 .Destination {
-    margin-top: 20%;
-    text-align: center;
-  }
+  margin-top: 20%;
+  text-align: center;
+  overflow: hidden;
+}
 
 .destination-image {
-    /* width: 400px; */
-    max-width: 100%; /* Endre bredden etter ønske */
-    /* height: 300px;
+  /* width: 400px; */
+  max-width: 100%; /* Endre bredden etter ønske */
+  /* height: 300px;
     max-height: 100%; */
-    object-fit: cover; /* Behold proporsjonene og beskjær bildet om nødvendig */
-  }
+  object-fit: cover; /* Behold proporsjonene og beskjær bildet om nødvendig */
+}
 
 .destination-name {
-    display: block;
-    margin-top: 5px;
-  }
-
+  display: block;
+  margin-top: 5px;
+}

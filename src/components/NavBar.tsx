@@ -25,28 +25,30 @@ const NavBar: React.FC = () => {
       <Container className="navbar-container">
         <Logo />
         <h1>Destinasjon Norge</h1>
-        <button onClick={toggleMenu} id="menu-toggle">
-          <img id="menuimg" src={profile} alt="Profile" />
-        </button>
-        {showMenu && (
-          <ul>
-            <li className="menu">
-              <button onClick={() => console.log("Navigating to Home")}>
-                Home
-              </button>
-            </li>
-            <li>
-              <button onClick={() => console.log("Navigating to Profile")}>
-                Profile
-              </button>
-            </li>
-            <li>
-              <button onClick={() => console.log("Navigating to Settings")}>
-                Settings
-              </button>
-            </li>
-        </ul>
-        )}
+        <div id="dropdown">
+          <button onClick={toggleMenu} id="menu-toggle">
+            <img id="menuimg" src={profile} alt="Profile" />
+          </button>
+          {showMenu && (
+            <ul className="menu-list">
+              <li className="menu">
+                <button onClick={() => console.log("Navigating to Home")}>
+                  Home
+                </button>
+              </li>
+              <li>
+                <button onClick={() => console.log("Navigating to Profile")}>
+                  Profile
+                </button>
+              </li>
+              <li>
+                <button onClick={() => console.log("Navigating to Settings")}>
+                  Settings
+                </button>
+              </li>
+            </ul>
+          )}
+        </div>
       </Container>
     </Navbar>
   );

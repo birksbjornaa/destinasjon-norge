@@ -1,16 +1,7 @@
-//header that can be changes in home.tsx
-
-// const SubHeader = () => {
-//     return (
-//         <div>
-//             <h2>SubHeader</h2>
-//         </div>
-//     )
-// }
-
+import "../css/Main.css";
 function SubHeader({string}: {string: string}) {
     return (
-        <div>
+        <div className="SubHeader">
             <h2>{string}</h2>
             <br></br>
         </div>

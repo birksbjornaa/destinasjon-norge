@@ -1,5 +1,7 @@
+import { Navbar } from "react-bootstrap";
 import { FilteringBar } from "../components/FilteringBar";
 import "../css/DestinationChooser.css";
+import NavBar from "../components/NavBar";
 
 
 
@@ -13,6 +15,7 @@ return (
     <div>
        {/* </div> liste.map */}
        {/* <Destination skrive inn data /> */}
+        <NavBar />
         <FilteringBar />
         <h2>Her kommer destinasjoner</h2>
        </div>

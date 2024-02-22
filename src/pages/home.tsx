@@ -6,6 +6,7 @@ import MainGallery from "../components/MainGallery";
 import SubHeader from "../components/SubHeader";
 import "../css/Main.css";
 import { destinationsDemoData } from "../components/DemoData";
+import SearchBar from "../components/SearchBar";
 
 export default function Home() {
   const messageRef = useRef<HTMLInputElement>(null);
@@ -35,22 +36,20 @@ export default function Home() {
       <div>
         <NavBar />
       </div>
-      {/* <MainText /> */}
+      <SearchBar />
       <div className="mainDestinations">
         <MainGallery destinations={destinationsDemoData} />
       </div>
-      <div className="popularDestinations">
-        <SubHeader string="Mest populære" />
-        <MainGallery
-          destinations={destinationsDemoData}
+      <SubHeader string="Mest populære" />
+      <div className="mainDestination">
+          <MainGallery destinations={destinationsDemoData}
           showArrows={false}
-        />{" "}
-        {/** Legg inn data her */}
+          />{" "}
+          {/** Legg inn data her */}
       </div>
-      <div className="recommendedDestinations">
-        <SubHeader string="Vi anbefaler" />
-        <MainGallery
-          destinations={destinationsDemoData}
+      <SubHeader string="Vi anbefaler" />
+      <div className="mainDestination">
+        <MainGallery destinations={destinationsDemoData}
           showArrows={false}
         />{" "}
         {/** Legg inn data her */}

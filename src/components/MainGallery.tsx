@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Destination, { DestinationProps } from "./Destination";
 import "../css/Main.css";
 
-// Move this to Destination?
-
 export interface MainGalleryProps {
   destinations: DestinationProps[];
   showArrows?: boolean;
@@ -27,17 +25,17 @@ const MainGallery: React.FC<MainGalleryProps> = ({ destinations, showArrows = tr
 
   return (
     <div className="maingallery">
-      {showArrows && <button onClick={goLeft}>{"<"}</button>}
+      {showArrows && <button className="galleryButton" onClick={goLeft}>{"<"}</button>}
       {destinations
         .slice(currentIndex, currentIndex + numberOfDestinationsShown)
         .map((destination) => (
           <Destination
-            key={destination.name} // Husk å legge til en nøkkel for hver destinasjon
+            key={destination.name}
             name={destination.name}
             imageSrc={destination.imageSrc}
           />
         ))}
-      {showArrows && <button onClick={goRight}>{">"}</button>}
+      {showArrows && <button className="galleryButton" onClick={goRight}>{">"}</button>}
     </div>
   );
 };

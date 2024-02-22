@@ -1,4 +1,3 @@
-
 import Home from "./pages/home";
 import DestinationChooser from "./pages/DestinationChooser";
 
@@ -9,8 +8,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/destination" element={<DestinationChooser />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/destination" element={<DestinationChooser />} />
         </Routes>
       </BrowserRouter>
     </div>

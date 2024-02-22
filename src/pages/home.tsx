@@ -1,35 +1,27 @@
-import { addDoc, collection } from "@firebase/firestore";
-import { SyntheticEvent, useRef } from "react";
-import { firestore } from "../components/firebaseConfig";
 import NavBar from "../components/NavBar";
 import MainGallery from "../components/MainGallery";
 import SubHeader from "../components/SubHeader";
 import "../css/Main.css";
-import { destinationsDemoData } from "../components/DemoData";
+import { getAllDestinations } from "../controllers/fierbaseController";
+import { DestinationProps } from "../components/GalleryDestination";
+import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 
 export default function Home() {
-  const messageRef = useRef<HTMLInputElement>(null);
-  const ref = collection(firestore, "messages");
+  const [destinations, setDestinations] = useState<DestinationProps[]>([]);
 
-  const handleSave = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    console.log(messageRef.current?.value);
+  useEffect(() => {
+    fetchAndSetData();
+  }, []);
 
-    let data = {
-      message: messageRef.current?.value,
-    };
-
-    try {
-      addDoc(ref, data);
-    } catch (e) {
-      console.log(e);
-    }
+  const fetchAndSetData = async () => {
+    const destinations = await getAllDestinations();
+    setDestinations(destinations);
   };
 
-  const handleHomeClick = () => {
-    // Logikken for å navigere tilbake til hjemmesiden
-  };
+  //const handleHomeClick = () => {
+  // Logikken for å navigere tilbake til hjemmesiden
+  //};
 
   return (
     <div className="homepage">
@@ -38,21 +30,15 @@ export default function Home() {
       </div>
       <SearchBar />
       <div className="mainDestinations">
-        <MainGallery destinations={destinationsDemoData} />
+        <MainGallery destinations={destinations} />
       </div>
       <SubHeader string="Mest populære" />
       <div className="mainDestination">
-          <MainGallery destinations={destinationsDemoData}
-          showArrows={false}
-          />{" "}
-          {/** Legg inn data her */}
+        <MainGallery destinations={destinations} showArrows={false} />{" "}
       </div>
       <SubHeader string="Vi anbefaler" />
       <div className="mainDestination">
-        <MainGallery destinations={destinationsDemoData}
-          showArrows={false}
-        />{" "}
-        {/** Legg inn data her */}
+        <MainGallery destinations={destinations} showArrows={false} />{" "}
       </div>
     </div>
   );

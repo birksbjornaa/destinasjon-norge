@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Destination, { DestinationProps } from "./Destination";
+import Destination, { DestinationProps } from "./GalleryDestination";
 import "../css/Main.css";
 
 export interface MainGalleryProps {

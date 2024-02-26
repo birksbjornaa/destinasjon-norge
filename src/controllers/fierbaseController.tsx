@@ -8,7 +8,7 @@ export async function getAllDestinations() {
   try {
     const snapshot = await getDocs(destinationCollection);
     return snapshot.docs.map((doc) => ({
-      name: doc.data().name as string,
+      name: doc.data().navn as string,
       imageSrc: doc.data().bilde as string,
     }));
   } catch (error) {

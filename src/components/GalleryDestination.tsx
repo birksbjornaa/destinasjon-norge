@@ -1,3 +1,5 @@
+import "../css/Main.css";
+
 export interface DestinationProps {
   name: string;
   imageSrc: string;
@@ -6,8 +8,8 @@ export interface DestinationProps {
 function Destination({ name, imageSrc }: DestinationProps) {
   return (
     <div className="Destination">
-      <img src={imageSrc}></img>
-      <span>{name}</span>
+      <img src={imageSrc} alt={name} className="destination-image" />
+      <span className="destination-name">{name}</span>
     </div>
   );
 }

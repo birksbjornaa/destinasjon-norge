@@ -1,0 +1,108 @@
+body{
+    width:100%;
+    justify-content: center;
+
+}
+
+
+.SliderContainer {
+    flex-basis: calc(33.33% - 10px);
+}
+
+.ButtonContainer {
+    align-self: flex-end;
+}
+
+
+/* Filteringbar */
+/* Filteringbar */
+.FilterCheckboxes {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    align-items: left;
+}
+
+.CheckboxGroup {
+    flex: 1 1 calc(20% - 10px); /* Del bredden i fire like deler */
+    display: flex;
+    flex-direction: column; /* Stabler elementene innenfor gruppen vertikalt */
+    align-items: left; /* Sentrerer elementene */
+}
+
+.ButtonContainer {
+    flex: 1 1 calc(20% - 10px); /* Del bredden i fire like deler */
+    display: flex;
+    justify-content: flex-end; /* Plasser knappen til høyre */
+    align-items: flex-end; /* Plasser knappen nederst */
+    gap: 10px;
+}
+
+/* Styling for filterbokser som ser ut som knapper */
+.FilterButton {
+    display: inline-block;
+    width: 120px; /* Sett en fast bredde for å sikre at alle knappene er like store */
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none; /* Unngår at teksten blir markert ved klikk */
+    margin-top: 10px;
+}
+
+/* Styling for valgte filterbokser */
+.FilterButton.selected {
+    background-color: green;
+    color: #fff;
+    border-color: green;
+    font-weight: bold;
+}
+
+
+/* Skjul checkboxen */
+.FilterButton input[type="checkbox"] {
+    display: none;
+}
+
+.SliderContainer{
+    align-items: left;
+}
+.SliderContainer input[type="range"]{
+    background-color: green;
+}
+
+
+/* Filteringbar */
+.ButtonContainer {
+    flex: 1 1 calc(25% - 10px); /* Del bredden i fire like deler */
+    display: flex;
+    justify-content: center;
+    align-items: left; /* Plasser knappen nederst */
+    gap: 10px;
+    margin-left: auto; /* Flytt knappen lengre mot høyre */
+}
+
+.ButtonContainer button {
+    /* Legg til stiler for knappen her */
+    padding: 10px 20px;
+    border: none;
+    background-color:white;
+    border: 2px solid #ccc;
+    color: black;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.ButtonContainer button:hover {
+    background-color: green; /* Endre bakgrunnsfarge ved hover */
+    color:white;
+}
+
+
+ h2{
+    text-align: center;
+}
+

@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import Destination, { DestinationProps } from "./GalleryDestination";
 import "../css/Main.css";
 
-// Move this to Destination?
-
 export interface MainGalleryProps {
   destinations: DestinationProps[];
+  showArrows?: boolean;
 }
 
-const MainGallery: React.FC<MainGalleryProps> = ({ destinations }) => {
+const MainGallery: React.FC<MainGalleryProps> = ({ destinations, showArrows = true }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const numberOfDestinationsShown = 3;
 
@@ -26,16 +25,17 @@ const MainGallery: React.FC<MainGalleryProps> = ({ destinations }) => {
 
   return (
     <div className="maingallery">
-      <button onClick={goLeft}>{"<"}</button>
+      {showArrows && <button className="galleryButton" onClick={goLeft}>{"<"}</button>}
       {destinations
         .slice(currentIndex, currentIndex + numberOfDestinationsShown)
         .map((destination) => (
           <Destination
+            key={destination.name}
             name={destination.name}
             imageSrc={destination.imageSrc}
           />
         ))}
-      <button onClick={goRight}>{">"}</button>
+      {showArrows && <button className="galleryButton" onClick={goRight}>{">"}</button>}
     </div>
   );
 };

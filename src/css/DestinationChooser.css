@@ -13,8 +13,6 @@ body{
     align-self: flex-end;
 }
 
-
-/* Filteringbar */
 /* Filteringbar */
 .FilterCheckboxes {
     width: 100%;
@@ -25,30 +23,30 @@ body{
 }
 
 .CheckboxGroup {
-    flex: 1 1 calc(20% - 10px); /* Del bredden i fire like deler */
+    flex: 1 1 calc(20% - 10px); 
     display: flex;
-    flex-direction: column; /* Stabler elementene innenfor gruppen vertikalt */
-    align-items: left; /* Sentrerer elementene */
+    flex-direction: column; 
+    align-items: left; 
 }
 
 .ButtonContainer {
-    flex: 1 1 calc(20% - 10px); /* Del bredden i fire like deler */
+    flex: 1 1 calc(20% - 10px); 
     display: flex;
-    justify-content: flex-end; /* Plasser knappen til høyre */
-    align-items: flex-end; /* Plasser knappen nederst */
+    justify-content: flex-end; 
+    align-items: flex-end; 
     gap: 10px;
 }
 
 /* Styling for filterbokser som ser ut som knapper */
 .FilterButton {
     display: inline-block;
-    width: 120px; /* Sett en fast bredde for å sikre at alle knappene er like store */
+    width: 120px;
     padding: 10px 20px;
     border: 2px solid #ccc;
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
-    user-select: none; /* Unngår at teksten blir markert ved klikk */
+    user-select: none; 
     margin-top: 10px;
 }
 
@@ -76,16 +74,15 @@ body{
 
 /* Filteringbar */
 .ButtonContainer {
-    flex: 1 1 calc(25% - 10px); /* Del bredden i fire like deler */
+    flex: 1 1 calc(25% - 10px); 
     display: flex;
     justify-content: center;
-    align-items: left; /* Plasser knappen nederst */
+    align-items: left;
     gap: 10px;
-    margin-left: auto; /* Flytt knappen lengre mot høyre */
+    margin-left: auto; 
 }
 
 .ButtonContainer button {
-    /* Legg til stiler for knappen her */
     padding: 10px 20px;
     border: none;
     background-color:white;
@@ -97,7 +94,7 @@ body{
 }
 
 .ButtonContainer button:hover {
-    background-color: green; /* Endre bakgrunnsfarge ved hover */
+    background-color: green;
     color:white;
 }
 
@@ -105,4 +102,17 @@ body{
  h2{
     text-align: center;
 }
+
+.DestinationOverview {
+    padding-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.SingleDestination {
+    width: 25%; 
+    box-sizing: border-box; 
+    padding: 10px; 
+}
+
 

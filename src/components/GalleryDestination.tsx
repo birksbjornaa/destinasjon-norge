@@ -3,13 +3,16 @@ import "../css/Main.css";
 export interface DestinationProps {
   name: string;
   imageSrc: string;
+  price: number;
 }
 
-function Destination({ name, imageSrc }: DestinationProps) {
+function Destination({ name, imageSrc, price }: DestinationProps) {
   return (
     <div className="Destination">
       <img src={imageSrc} alt={name} className="destination-image" />
       <span className="destination-name">{name}</span>
+
+    
     </div>
   );
 }

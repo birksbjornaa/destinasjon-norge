@@ -2,6 +2,8 @@ import "../css/Main.css";
 import profile from "../assets/profile.jpg";
 import React, { useState } from "react";
 import { Dropdown, Navbar, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import {loggedIn } from "../pages/Login.tsx";
 
 import imgLogo from "../assets/LogoDestinasjonNorge.png";
 // resize logo
@@ -14,6 +16,8 @@ const Logo = () => {
     </div>
   );
 };
+
+// const LoggedIn: boolean = false;
 
 const NavBar: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -32,15 +36,30 @@ const NavBar: React.FC = () => {
           {showMenu && (
             <ul className="menu-list">
               <li className="menu">
-                <button onClick={() => console.log("Navigating to Home")}>
+                <button onClick={() => console.log("Navigating to Home")} >
                   Home
                 </button>
               </li>
-              <li>
-                <button onClick={() => console.log("Navigating to Profile")}>
-                  Profile
-                </button>
+              {loggedIn? (
+                <li>
+                  {/* <button onClick={() => console.log("Navigating to Profile")}>
+                    Profile
+                  </button> */}
+                  <Link to="/login">
+                    <button onClick={() => console.log("Navigating to Login")}>
+                       Login
+                    </button>
+                </Link>
+                </li>
+              ) : (
+                <li>
+                  <Link to="/login">
+                    <button onClick={() => console.log("Navigating to Login")}>
+                       Login
+                    </button>
+                </Link>
               </li>
+              )}
               <li>
                 <button onClick={() => console.log("Navigating to Settings")}>
                   Settings

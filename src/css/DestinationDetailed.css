@@ -14,19 +14,10 @@ body {
     text-align: center;
   }
   
-  .image-container {
-    margin-top: 20px;
-  }
-  
-  .arrow-button {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
+
   
   .image {
-    width: 300px;
+    width: 50%;
     height: auto;
     margin: 0 10px;
   }
@@ -71,3 +62,12 @@ body {
     width: 25px;
     height: 25px;
   }
+  .tags ul {
+    list-style-type: none;
+    padding: 0;
+    margin-right: 10px;
+  }
+  .tags li {
+      display: inline-block;
+    }
+  

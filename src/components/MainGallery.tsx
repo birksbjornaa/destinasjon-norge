@@ -40,7 +40,7 @@ const MainGallery: React.FC<MainGalleryProps> = ({
         .map((destination) => (
           <button onClick={() => handleTileClicked(destination.id)}>
             <Destination
-              key={destination.name}
+              key={destination.id}
               name={destination.name}
               imageSrc={destination.imageSrc}
               id={destination.id}

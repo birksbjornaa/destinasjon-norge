@@ -6,6 +6,7 @@ import { DestinationProps } from "../components/GalleryDestination";
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { useNavigate } from "react-router";
+import NavBar from "../components/NavBar";
 
 export default function Home() {
   const [destinations, setDestinations] = useState<DestinationProps[]>([]);
@@ -26,11 +27,12 @@ export default function Home() {
   let navigate = useNavigate();
 
   const handleDestinationTileClicked = (destinationId: string) => {
-    navigate("/destinationdetailed/" + destinationId);
+    navigate("/destination/" + destinationId);
   };
 
   return (
     <div className="homepage">
+      <NavBar />
       <SearchBar />
       <div className="mainDestinations">
         <MainGallery

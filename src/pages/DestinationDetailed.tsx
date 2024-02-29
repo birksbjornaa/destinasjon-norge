@@ -7,6 +7,7 @@ import "../css/DestinationDetailed.css";
 import Like from "../assets/Like.png";
 import Unlike from "../assets/Unlike.png";
 import { useParams } from "react-router-dom";
+import NavBar from "../components/NavBar";
 
 export default function DestinationDetailed() {
   const [destination, setDestination] = useState(createMissingData());
@@ -31,6 +32,7 @@ export default function DestinationDetailed() {
 
   return (
     <div className="destinationDetailed">
+      <NavBar />
       <div className="container">
         <h1 className="header">{destination.name}</h1>
 

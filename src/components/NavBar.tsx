@@ -3,7 +3,7 @@ import profile from "../assets/profile.jpg";
 import React, { useState } from "react";
 import { Dropdown, Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import {loggedIn } from "../pages/Login.tsx";
+import { LoggedIn } from "../pages/Login.tsx";
 
 import imgLogo from "../assets/LogoDestinasjonNorge.png";
 // resize logo
@@ -40,7 +40,7 @@ const NavBar: React.FC = () => {
                   Home
                 </button>
               </li>
-              {loggedIn? (
+              {LoggedIn? (
                 <li>
                   {/* <button onClick={() => console.log("Navigating to Profile")}>
                     Profile

@@ -1,40 +1,66 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import "../css/DestinationChooser.css";
 import { getRemoteConfig } from 'firebase/remote-config';
 
-export function FilteringBar() {
+export function FilteringBar({applyFilters}:{applyFilters:(tags:string[], price:number) => void}) {
+
+    const [tags, setTags] = useState<string[]>([]);
+    const [price, setPrice] = useState(5);
+
+    const handleSliderChange = (newPrice: number) => {
+        setPrice(newPrice);
+    };
+
+    const handleCheckboxChange = (label: string, isChecked: boolean) => {
+        if (isChecked) {
+            setTags(prevTags => [...prevTags, label.toLowerCase()]);
+        } else {
+            setTags(prevTags => prevTags.filter(tag => tag !== label));
+        }
+    };
+
+    const handleApplyFilters = ()=>{
+        applyFilters(tags, price)
+    }
+
+    useEffect(()=> {console.log(tags)
+    console.log(price)
+    },[tags, price])
+
     return (
         <div className="FilterCheckboxes">
             <div className="CheckboxGroup">
-                <Checkbox label="By" />
-                <Checkbox label="Natur" />
+                <Checkbox label="By" onChange={handleCheckboxChange}  />
+                <Checkbox label="Natur" onChange={handleCheckboxChange} />
             </div>
             <div className="CheckboxGroup">
-                <Checkbox label="Historie" />
-                <Checkbox label="Kultur" />
+                <Checkbox label="Historie" onChange={handleCheckboxChange} />
+                <Checkbox label="Kultur" onChange={handleCheckboxChange} />
             </div>
             <div className="CheckboxGroup">
-                <Checkbox label="Mat" />
-                <Checkbox label="Sport" />
+                <Checkbox label="Mat" onChange={handleCheckboxChange} />
+                <Checkbox label="Sport" onChange={handleCheckboxChange} />
             </div>
             <div className='="SliderContainer'>
-            <Slider />
+            <Slider onChange={handleSliderChange} />
             </div>
             <div className="ButtonContainer">
 
-                <Button title="Søk etter reise" onClick={() => console.log('Button clicked!')} />
+                <Button title="Søk etter reise" onClick={handleApplyFilters} />
             </div>
 
         </div>
     );
 }
 
-const Slider = () => {
+const Slider = ({onChange}: { onChange: (newPrice:number)=>void}) => {
     const levels: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const [level, setLevel] = useState<number>(levels[4]);
 
     const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLevel(parseInt(event.target.value, 10));
+        const newValue = parseInt(event.target.value, 10);
+        setLevel(newValue);
+        onChange(newValue);
     };
 
     return (
@@ -55,12 +81,16 @@ const Button = ({ title, onClick }: { title: string; onClick: () => void }) => (
     <button onClick={onClick}>{title}</button>
 );
 
-const Checkbox = ({ label }: { label: string }) => {
+const Checkbox = ({ label, onChange }: { label: string, onChange: (label:string, isChecked:boolean) => void }) => {
     const [isChecked, setIsChecked] = useState(false);
 
     const toggleCheckbox = () => {
-        setIsChecked(!isChecked);
+        const newCheckedState = !isChecked;
+        setIsChecked(newCheckedState);
+        onChange(label, newCheckedState);
     };
+
+
 
     return (
         <label className={`FilterButton ${isChecked ? 'selected' : ''}`} htmlFor={label}>

@@ -20,19 +20,19 @@ export default function Home() {
     setDestinations(destinations);
   };
 
-  //const handleHomeClick = () => {
-  // Logikken for å navigere tilbake til hjemmesiden
-  //};
-
   let navigate = useNavigate();
 
   const handleDestinationTileClicked = (destinationId: string) => {
     navigate("/destination/" + destinationId);
   };
 
+  const goToHomePage = () => {
+    navigate("/");
+  };
+
   return (
     <div className="homepage">
-      <NavBar />
+      <NavBar handleLogoHomeClicked={goToHomePage} />
       <SearchBar />
       <div className="mainDestinations">
         <MainGallery

@@ -4,18 +4,12 @@ import React, { useState } from "react";
 import { Dropdown, Navbar, Container } from "react-bootstrap";
 
 import imgLogo from "../assets/LogoDestinasjonNorge.png";
-// resize logo
-// import { useWindowSize } from 'react-use';
 
-const Logo = () => {
-  return (
-    <div>
-      <img src={imgLogo} width={125} height={125} alt="imgLogo" />
-    </div>
-  );
-};
+interface navBarProps {
+  handleLogoHomeClicked: () => void;
+}
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<navBarProps> = ({ handleLogoHomeClicked }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => setShowMenu(!showMenu);
@@ -23,7 +17,15 @@ const NavBar: React.FC = () => {
   return (
     <Navbar>
       <Container className="navbar-container">
-        <Logo />
+        <div className="logo">
+          <img
+            src={imgLogo}
+            width={125}
+            height={125}
+            alt="imgLogo"
+            onClick={() => handleLogoHomeClicked()}
+          />
+        </div>
         <h1>Destinasjon Norge</h1>
         <div id="dropdown">
           <button onClick={toggleMenu} id="menu-toggle">
@@ -32,9 +34,7 @@ const NavBar: React.FC = () => {
           {showMenu && (
             <ul className="menu-list">
               <li className="menu">
-                <button onClick={() => console.log("Navigating to Home")}>
-                  Home
-                </button>
+                <button onClick={() => handleLogoHomeClicked()}>Home</button>
               </li>
               <li>
                 <button onClick={() => console.log("Navigating to Profile")}>

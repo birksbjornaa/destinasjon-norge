@@ -6,7 +6,7 @@ import {
 import "../css/DestinationDetailed.css";
 import Like from "../assets/Like.png";
 import Unlike from "../assets/Unlike.png";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 
 export default function DestinationDetailed() {
@@ -30,9 +30,14 @@ export default function DestinationDetailed() {
     setIsLiked((prevIsLiked) => !prevIsLiked);
   };
 
+  let navigate = useNavigate();
+  const goToHomePage = () => {
+    navigate("/");
+  };
+
   return (
     <div className="destinationDetailed">
-      <NavBar />
+      <NavBar handleLogoHomeClicked={goToHomePage} />
       <div className="container">
         <h1 className="header">{destination.name}</h1>
 

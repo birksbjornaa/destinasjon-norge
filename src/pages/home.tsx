@@ -5,6 +5,7 @@ import { getAllDestinations } from "../controllers/fierbaseController";
 import { DestinationProps } from "../components/GalleryDestination";
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
+import { useNavigate } from "react-router";
 
 export default function Home() {
   const [destinations, setDestinations] = useState<DestinationProps[]>([]);
@@ -22,19 +23,36 @@ export default function Home() {
   // Logikken for å navigere tilbake til hjemmesiden
   //};
 
+  let navigate = useNavigate();
+
+  const handleDestinationTileClicked = (destinationId: number) => {
+    navigate("/destinationdetailed/" + destinationId);
+  };
+
   return (
     <div className="homepage">
       <SearchBar />
       <div className="mainDestinations">
-        <MainGallery destinations={destinations} />
+        <MainGallery
+          destinations={destinations}
+          handleTileClicked={handleDestinationTileClicked}
+        />
       </div>
       <SubHeader string="Mest populære" />
       <div className="mainDestination">
-        <MainGallery destinations={destinations} neverShowArrows={false} />{" "}
+        <MainGallery
+          destinations={destinations}
+          handleTileClicked={handleDestinationTileClicked}
+          neverShowArrows={false}
+        />{" "}
       </div>
       <SubHeader string="Vi anbefaler" />
       <div className="mainDestination">
-        <MainGallery destinations={destinations} neverShowArrows={false} />{" "}
+        <MainGallery
+          destinations={destinations}
+          handleTileClicked={handleDestinationTileClicked}
+          neverShowArrows={false}
+        />{" "}
       </div>
     </div>
   );

@@ -4,11 +4,13 @@ import "../css/Main.css";
 
 export interface MainGalleryProps {
   destinations: DestinationProps[];
+  handleTileClicked: (destinationId: number) => void;
   neverShowArrows?: boolean;
 }
 
 const MainGallery: React.FC<MainGalleryProps> = ({
   destinations,
+  handleTileClicked,
   neverShowArrows = false,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -36,11 +38,16 @@ const MainGallery: React.FC<MainGalleryProps> = ({
       {destinations
         .slice(currentIndex, currentIndex + numberOfDestinationsShown)
         .map((destination) => (
-          <Destination
-            key={destination.name}
-            name={destination.name}
-            imageSrc={destination.imageSrc}
-          />
+          <button onClick={() => handleTileClicked(destination.id)}>
+            <Destination
+              key={destination.name}
+              name={destination.name}
+              imageSrc={destination.imageSrc}
+              id={destination.id}
+              region={destination.region}
+              description={destination.region}
+            />
+          </button>
         ))}
       {!neverShowArrows && (
         <button className="galleryButton" onClick={goRight}>

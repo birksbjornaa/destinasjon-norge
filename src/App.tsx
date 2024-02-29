@@ -1,7 +1,6 @@
 import Home from "./pages/home";
 import DestinationChooser from "./pages/DestinationChooser";
 import DestinationDetailed from "./pages/DestinationDetailed";
-
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 
@@ -14,7 +13,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/destination" element={<DestinationChooser />} />
           <Route
-            path="/destinationdetailed"
+            path="/destinationdetailed/:id"
             element={<DestinationDetailed />}
           />
         </Routes>

@@ -1,7 +1,7 @@
 import "../css/Main.css";
 
 export interface DestinationProps {
-  id: number;
+  id: string;
   name: string;
   imageSrc: string;
   region: string;

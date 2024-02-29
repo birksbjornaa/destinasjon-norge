@@ -4,7 +4,7 @@ import "../css/Main.css";
 
 export interface MainGalleryProps {
   destinations: DestinationProps[];
-  handleTileClicked: (destinationId: number) => void;
+  handleTileClicked: (destinationId: string) => void;
   neverShowArrows?: boolean;
 }
 

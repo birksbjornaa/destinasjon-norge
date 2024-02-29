@@ -25,7 +25,7 @@ export default function Home() {
 
   let navigate = useNavigate();
 
-  const handleDestinationTileClicked = (destinationId: number) => {
+  const handleDestinationTileClicked = (destinationId: string) => {
     navigate("/destinationdetailed/" + destinationId);
   };
 

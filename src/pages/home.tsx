@@ -30,11 +30,11 @@ export default function Home() {
       </div>
       <SubHeader string="Mest populære" />
       <div className="mainDestination">
-        <MainGallery destinations={destinations} showArrows={false} />{" "}
+        <MainGallery destinations={destinations} neverShowArrows={false} />{" "}
       </div>
       <SubHeader string="Vi anbefaler" />
       <div className="mainDestination">
-        <MainGallery destinations={destinations} showArrows={false} />{" "}
+        <MainGallery destinations={destinations} neverShowArrows={false} />{" "}
       </div>
     </div>
   );

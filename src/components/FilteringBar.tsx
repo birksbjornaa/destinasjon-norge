@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import "../css/DestinationChooser.css";
 import { getRemoteConfig } from 'firebase/remote-config';
 
-export function FilteringBar() {
+export function FilteringBar({applyFilters}:{applyFilters:(tags:string[], price:number) => void}) {
 
     const [tags, setTags] = useState<string[]>([]);
     const [price, setPrice] = useState(5);
@@ -13,11 +13,15 @@ export function FilteringBar() {
 
     const handleCheckboxChange = (label: string, isChecked: boolean) => {
         if (isChecked) {
-            setTags(prevTags => [...prevTags, label]);
+            setTags(prevTags => [...prevTags, label.toLowerCase()]);
         } else {
             setTags(prevTags => prevTags.filter(tag => tag !== label));
         }
     };
+
+    const handleApplyFilters = ()=>{
+        applyFilters(tags, price)
+    }
 
     useEffect(()=> {console.log(tags)
     console.log(price)
@@ -42,7 +46,7 @@ export function FilteringBar() {
             </div>
             <div className="ButtonContainer">
 
-                <Button title="Søk etter reise" onClick={() => console.log('Button clicked!')} />
+                <Button title="Søk etter reise" onClick={handleApplyFilters} />
             </div>
 
         </div>

@@ -13,7 +13,6 @@ const DestinationsOverview: React.FC<MainGalleryProps> = ({ destinations }) => {
                     <Destination
                         name={destination.name}
                         imageSrc={destination.imageSrc}
-                        price={destination.price}
                     />
                 </div>
             ))}

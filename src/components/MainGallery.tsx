@@ -33,7 +33,7 @@ const MainGallery: React.FC<MainGalleryProps> = ({ destinations, showArrows = tr
             key={destination.name}
             name={destination.name}
             imageSrc={destination.imageSrc}
-            price={destination.price}
+            
           />
         ))}
       {showArrows && <button className="galleryButton" onClick={goRight}>{">"}</button>}

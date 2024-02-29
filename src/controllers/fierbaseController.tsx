@@ -10,13 +10,14 @@ export async function getAllDestinations() {
     return snapshot.docs.map((doc) => ({
       name: doc.data().navn as string,
       imageSrc: doc.data().bilde as string,
-      price: doc.data().prisnivå as number,
-      //tags: (doc.data().tags as string).split(";").map(tag => tag.trim())
+      price: doc.data().prisnivaa as number,
+      tags: doc.data().tags as string[]
     }));
   } catch (error) {
     console.error("Error getting documents: ", error);
     return [];
   }
+
 
 
   

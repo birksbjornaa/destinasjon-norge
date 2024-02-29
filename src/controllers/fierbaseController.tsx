@@ -11,10 +11,13 @@ export async function getAllDestinations() {
       name: doc.data().navn as string,
       imageSrc: doc.data().bilde as string,
       price: doc.data().prisnivå as number,
-      tags: (doc.data().tags as string).split(";").map(tag => tag.trim())
+      //tags: (doc.data().tags as string).split(";").map(tag => tag.trim())
     }));
   } catch (error) {
     console.error("Error getting documents: ", error);
     return [];
   }
+
+
+  
 }

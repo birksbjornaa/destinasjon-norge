@@ -10,6 +10,7 @@ export interface DestinationData {
   imageSrc: string;
   region: string;
   description: string;
+  price: number;
   tags: string[];
 }
 
@@ -21,6 +22,7 @@ export function createMissingData(): DestinationData {
     imageSrc: "missing",
     region: "missing",
     description: "missing",
+    price: 0,
     tags: [""],
   };
 }
@@ -34,6 +36,7 @@ export async function getAllDestinations(): Promise<DestinationData[]> {
       imageSrc: doc.data().bilde as string,
       region: doc.data().fylke as string,
       description: doc.data().beskrivelse as string,
+      price: doc.data().prisnivaa as number,
       tags: doc.data().tags as string[],
     }));
   } catch (error) {
@@ -55,6 +58,7 @@ export async function getDestination(id: string): Promise<DestinationData> {
         imageSrc: snapData.bilde as string,
         region: snapData.fylke as string,
         description: snapData.beskrivelse as string,
+        price: snapData.pris as number,
         tags: snapData.tags as string[],
       };
     } else {

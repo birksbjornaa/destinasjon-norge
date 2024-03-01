@@ -20,6 +20,20 @@ export default function DestinationChooser() {
     setDestinations(destinations);
   };
 
+  const applyFilters = async (tags: string[], price: number) => {
+    const filteredDestinations = (await getAllDestinations()).filter(
+      (destination) => {
+        console.log(destination.tags);
+        return (
+          destination.price <= price &&
+          tags.filter((tag) => !destination.tags.includes(tag)).length == 0
+        );
+      }
+    );
+
+    setDestinations(filteredDestinations);
+  };
+
   let navigate = useNavigate();
   const goToHomePage = () => {
     navigate("/");
@@ -28,7 +42,7 @@ export default function DestinationChooser() {
   return (
     <div>
       <NavBar handleLogoHomeClicked={goToHomePage} />
-      <FilteringBar />
+      <FilteringBar applyFilters={applyFilters} />
       <div className="DestinationOverview">
         <DestinationsOverview destinations={destinations} />
       </div>

@@ -70,6 +70,11 @@ export default function DestinationDetailed() {
         <p id="textbeskrivelse" className="text">
           {destination.description}
         </p>
+        <img
+          src={`https://www.yr.no/nb/innhold/${destination.yrid}/meteogram.svg`}
+          alt="Image"
+          className="image"
+        />
       </div>
       <h2 className="sub-header">Kommentarer</h2>
     </div>

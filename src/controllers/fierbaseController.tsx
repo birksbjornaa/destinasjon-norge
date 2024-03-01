@@ -12,6 +12,7 @@ export interface DestinationData {
   description: string;
   price: number;
   tags: string[];
+  yrid: string;
 }
 
 // Somethimes null is not okay, so this is returned instead
@@ -24,6 +25,7 @@ export function createMissingData(): DestinationData {
     description: "missing",
     price: 0,
     tags: [""],
+    yrid: "",
   };
 }
 
@@ -38,6 +40,7 @@ export async function getAllDestinations(): Promise<DestinationData[]> {
       description: doc.data().beskrivelse as string,
       price: doc.data().prisnivaa as number,
       tags: doc.data().tags as string[],
+      yrid: doc.data().yrid as string,
     }));
   } catch (error) {
     console.error("Error getting documents: ", error);
@@ -60,6 +63,7 @@ export async function getDestination(id: string): Promise<DestinationData> {
         description: snapData.beskrivelse as string,
         price: snapData.pris as number,
         tags: snapData.tags as string[],
+        yrid: snapData.yrid as string,
       };
     } else {
       return createMissingData();

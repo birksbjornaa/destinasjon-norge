@@ -31,6 +31,7 @@ body {
   width: 125px;
 }
 
+
 .navbar-nav {
     padding-right: 20px;
 
@@ -41,7 +42,11 @@ body {
   padding: 0;
   margin: 0;
   display: flex;
-  align-items: center; /* Sentrere elementene vertikalt */
+  align-items: center; 
+}
+
+.logo {
+  cursor: pointer;
 }
 
 .navbar-nav li {

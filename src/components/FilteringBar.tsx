@@ -1,79 +1,120 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import "../css/DestinationChooser.css";
-import { getRemoteConfig } from 'firebase/remote-config';
+import { getRemoteConfig } from "firebase/remote-config";
 
-export function FilteringBar() {
-    return (
-        <div className="FilterCheckboxes">
-            <div className="CheckboxGroup">
-                <Checkbox label="By" />
-                <Checkbox label="Natur" />
-            </div>
-            <div className="CheckboxGroup">
-                <Checkbox label="Historie" />
-                <Checkbox label="Kultur" />
-            </div>
-            <div className="CheckboxGroup">
-                <Checkbox label="Mat" />
-                <Checkbox label="Sport" />
-            </div>
-            <div className='="SliderContainer'>
-            <Slider />
-            </div>
-            <div className="ButtonContainer">
+export function FilteringBar({
+  applyFilters,
+}: {
+  applyFilters: (tags: string[], price: number) => void;
+}) {
+  const [tags, setTags] = useState<string[]>([]);
+  const [price, setPrice] = useState(5);
 
-                <Button title="Søk etter reise" onClick={() => console.log('Button clicked!')} />
-            </div>
+  const handleSliderChange = (newPrice: number) => {
+    setPrice(newPrice);
+  };
 
-        </div>
-    );
+  const handleCheckboxChange = (label: string, isChecked: boolean) => {
+    if (isChecked) {
+      setTags((prevTags) => [...prevTags, label.toLowerCase()]);
+    } else {
+      setTags((prevTags) =>
+        prevTags.filter((tag) => tag.toLowerCase() !== label.toLowerCase())
+      );
+    }
+  };
+
+  const handleApplyFilters = () => {
+    applyFilters(tags, price);
+  };
+
+  useEffect(() => {
+    console.log(tags);
+    console.log(price);
+  }, [tags, price]);
+
+  return (
+    <div className="FilterCheckboxes">
+      <div className="CheckboxGroup">
+        <Checkbox label="By" onChange={handleCheckboxChange} />
+        <Checkbox label="Natur" onChange={handleCheckboxChange} />
+      </div>
+      <div className="CheckboxGroup">
+        <Checkbox label="Historie" onChange={handleCheckboxChange} />
+        <Checkbox label="Kultur" onChange={handleCheckboxChange} />
+      </div>
+      <div className="CheckboxGroup">
+        <Checkbox label="Mat" onChange={handleCheckboxChange} />
+        <Checkbox label="Sport" onChange={handleCheckboxChange} />
+      </div>
+      <div className='="SliderContainer'>
+        <Slider onChange={handleSliderChange} />
+      </div>
+      <div className="ButtonContainer">
+        <Button title="Søk etter reise" onClick={handleApplyFilters} />
+      </div>
+    </div>
+  );
 }
 
-const Slider = () => {
-    const levels: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    const [level, setLevel] = useState<number>(levels[4]);
+const Slider = ({ onChange }: { onChange: (newPrice: number) => void }) => {
+  const levels: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const [level, setLevel] = useState<number>(levels[4]);
 
-    const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLevel(parseInt(event.target.value, 10));
-    };
+  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(event.target.value, 10);
+    setLevel(newValue);
+    onChange(newValue);
+  };
 
-    return (
-        <div className="customSlider">
-            <p>Valgt prisnivå: {level}</p>
-            <input
-                type="range"
-                min={levels[0]}
-                max={levels[levels.length - 1]}
-                value={level}
-                onChange={handleSliderChange}
-            />
-        </div>
-    );
-}
+  return (
+    <div className="customSlider">
+      <p>Valgt prisnivå: {level}</p>
+      <input
+        type="range"
+        min={levels[0]}
+        max={levels[levels.length - 1]}
+        value={level}
+        onChange={handleSliderChange}
+      />
+    </div>
+  );
+};
 
 const Button = ({ title, onClick }: { title: string; onClick: () => void }) => (
-    <button onClick={onClick}>{title}</button>
+  <button onClick={onClick}>{title}</button>
 );
 
-const Checkbox = ({ label }: { label: string }) => {
-    const [isChecked, setIsChecked] = useState(false);
+const Checkbox = ({
+  label,
+  onChange,
+}: {
+  label: string;
+  onChange: (label: string, isChecked: boolean) => void;
+}) => {
+  const [isChecked, setIsChecked] = useState(false);
 
-    const toggleCheckbox = () => {
-        setIsChecked(!isChecked);
-    };
+  const toggleCheckbox = () => {
+    const newCheckedState = !isChecked;
+    setIsChecked(newCheckedState);
+    onChange(label, newCheckedState);
+  };
 
-    return (
-        <label className={`FilterButton ${isChecked ? 'selected' : ''}`} htmlFor={label}>
-            {label}
-            <input
-                id={label}
-                type="checkbox"
-                checked={isChecked}
-                onChange={toggleCheckbox}
-                style={{ color: 'green' }}
-            />
-        </label>
-    );
+  return (
+    <label
+      className={`FilterButton ${isChecked ? "selected" : ""}`}
+      htmlFor={label}
+    >
+      {label}
+      <input
+        id={label}
+        type="checkbox"
+        checked={isChecked}
+        onChange={toggleCheckbox}
+        style={{ color: "green" }}
+      />
+    </label>
+  );
 };
 
 export default FilteringBar;

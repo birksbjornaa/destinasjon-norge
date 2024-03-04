@@ -4,10 +4,15 @@ import "../css/Main.css";
 
 export interface MainGalleryProps {
   destinations: DestinationProps[];
-  showArrows?: boolean;
+  handleTileClicked: (destinationId: string) => void;
+  neverShowArrows?: boolean;
 }
 
-const MainGallery: React.FC<MainGalleryProps> = ({ destinations, showArrows = true }) => {
+const MainGallery: React.FC<MainGalleryProps> = ({
+  destinations,
+  handleTileClicked,
+  neverShowArrows = false,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const numberOfDestinationsShown = 3;
 
@@ -25,17 +30,30 @@ const MainGallery: React.FC<MainGalleryProps> = ({ destinations, showArrows = tr
 
   return (
     <div className="maingallery">
-      {showArrows && <button className="galleryButton" onClick={goLeft}>{"<"}</button>}
+      {!neverShowArrows && (
+        <button className="galleryButton" onClick={goLeft}>
+          {"<"}
+        </button>
+      )}
       {destinations
         .slice(currentIndex, currentIndex + numberOfDestinationsShown)
         .map((destination) => (
-          <Destination
-            key={destination.name}
-            name={destination.name}
-            imageSrc={destination.imageSrc}
-          />
+          <button onClick={() => handleTileClicked(destination.id)}>
+            <Destination
+              key={destination.id}
+              name={destination.name}
+              imageSrc={destination.imageSrc}
+              id={destination.id}
+              region={destination.region}
+              description={destination.region}
+            />
+          </button>
         ))}
-      {showArrows && <button className="galleryButton" onClick={goRight}>{">"}</button>}
+      {!neverShowArrows && (
+        <button className="galleryButton" onClick={goRight}>
+          {">"}
+        </button>
+      )}
     </div>
   );
 };

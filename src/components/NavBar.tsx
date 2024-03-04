@@ -1,13 +1,11 @@
 import "../css/Main.css";
 import profile from "../assets/profile.jpg";
 import React, { useState } from "react";
-import { Dropdown, Navbar, Container } from "react-bootstrap";
+import { Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { LoggedIn } from "../pages/Login.tsx";
 
 import imgLogo from "../assets/LogoDestinasjonNorge.png";
-// resize logo
-// import { useWindowSize } from 'react-use';
 
 const Logo = () => {
   return (
@@ -16,8 +14,6 @@ const Logo = () => {
     </div>
   );
 };
-
-// const LoggedIn: boolean = false;
 
 const NavBar: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -42,20 +38,15 @@ const NavBar: React.FC = () => {
               </li>
               {LoggedIn? (
                 <li>
-                  {/* <button onClick={() => console.log("Navigating to Profile")}>
+                  <button onClick={() => console.log("Navigating to Profile")}>
                     Profile
-                  </button> */}
-                  <Link to="/login">
-                    <button onClick={() => console.log("Navigating to Login")}>
-                       Login
-                    </button>
-                </Link>
+                  </button>
                 </li>
               ) : (
                 <li>
                   <Link to="/login">
                     <button onClick={() => console.log("Navigating to Login")}>
-                       Login
+                      Login
                     </button>
                 </Link>
               </li>
@@ -74,12 +65,3 @@ const NavBar: React.FC = () => {
 };
 
 export default NavBar;
-
-{
-  /* <ul>
-    <Logo />
-    <li>Home</li>
-    <li>Profile</li>
-    <li>Settings</li>
-</ul> */
-}

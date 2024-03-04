@@ -1,39 +1,42 @@
-import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
-import { useState, useEffect } from "react";
+import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 import NavBar from "../components/NavBar";
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { useEffect } from "react";
+
 
 let LoggedIn: boolean = false;
 
-export default function Login() { 
+export default function Login() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
+  const navigate = useNavigate();
   
-  signInWithRedirect(auth, provider)
-  .then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-
-    const user = result.user;
-    if (user !== null){
+  const handleLogin = () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result);
       LoggedIn = true;
-      console.log("Logged in");
-      return (
-        <Button>Go to home page
-          <Link to="/"/>
-        </Button>
-      );
+      navigate('/');
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
+
+  useEffect(() => {
+    const navigateHome = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      LoggedIn = true;
+      navigate('/');
     } else {
-      return (
-        <div>
-          <NavBar />
-          <h1>Please wait</h1>
-        </div>
-      );}
-  }).catch((error) => {
-    console.log(error);
+      handleLogin();
+    }
   });
-  }
-  export {LoggedIn};
+
+  return () => navigateHome();
+  }, [auth, navigate]);
+
+return (<div><NavBar /></div>);
+}
+
+export { LoggedIn };
   

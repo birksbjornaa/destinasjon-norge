@@ -35,7 +35,7 @@ export default function Login() {
   return () => navigateHome();
   }, [auth, navigate]);
 
-return (<div><NavBar /></div>);
+return (<div><NavBar handleLogoHomeClicked={() => navigate("/")}/></div>);
 }
 
 export { LoggedIn };

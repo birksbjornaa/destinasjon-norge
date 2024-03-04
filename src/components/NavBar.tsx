@@ -1,7 +1,9 @@
 import "../css/Main.css";
 import profile from "../assets/profile.jpg";
 import React, { useState } from "react";
-import { Dropdown, Navbar, Container } from "react-bootstrap";
+import { Navbar, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { LoggedIn } from "../pages/Login.tsx";
 
 import imgLogo from "../assets/LogoDestinasjonNorge.png";
 
@@ -34,13 +36,26 @@ const NavBar: React.FC<navBarProps> = ({ handleLogoHomeClicked }) => {
           {showMenu && (
             <ul className="menu-list">
               <li className="menu">
+                <button onClick={() => console.log("Navigating to Home")} >
+                  Home
+                </button>
                 <button onClick={() => handleLogoHomeClicked()}>Home</button>
               </li>
-              <li>
-                <button onClick={() => console.log("Navigating to Profile")}>
-                  Profile
-                </button>
+              {LoggedIn? (
+                <li>
+                  <button onClick={() => console.log("Navigating to Profile")}>
+                    Profile
+                  </button>
+                </li>
+              ) : (
+                <li>
+                  <Link to="/login">
+                    <button onClick={() => console.log("Navigating to Login")}>
+                      Login
+                    </button>
+                </Link>
               </li>
+              )}
               <li>
                 <button onClick={() => console.log("Navigating to Settings")}>
                   Settings
@@ -55,12 +70,3 @@ const NavBar: React.FC<navBarProps> = ({ handleLogoHomeClicked }) => {
 };
 
 export default NavBar;
-
-{
-  /* <ul>
-    <Logo />
-    <li>Home</li>
-    <li>Profile</li>
-    <li>Settings</li>
-</ul> */
-}

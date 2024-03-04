@@ -1,118 +1,122 @@
-body{
-    width:100%;
-    justify-content: center;
-
+body {
+  width: 100%;
+  justify-content: center;
 }
 
-
 .SliderContainer {
-    flex-basis: calc(33.33% - 10px);
+  flex-basis: calc(33.33% - 10px);
 }
 
 .ButtonContainer {
-    align-self: flex-end;
+  align-self: flex-end;
 }
 
 /* Filteringbar */
 .FilterCheckboxes {
-    width: 100%;
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    align-items: left;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  align-items: left;
 }
 
 .CheckboxGroup {
-    flex: 1 1 calc(20% - 10px); 
-    display: flex;
-    flex-direction: column; 
-    align-items: left; 
+  flex: 1 1 calc(20% - 10px);
+  display: flex;
+  flex-direction: column;
+  align-items: left;
 }
 
 .ButtonContainer {
-    flex: 1 1 calc(20% - 10px); 
-    display: flex;
-    justify-content: flex-end; 
-    align-items: flex-end; 
-    gap: 10px;
+  flex: 1 1 calc(20% - 10px);
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 10px;
 }
 
 /* Styling for filterbokser som ser ut som knapper */
 .FilterButton {
-    display: inline-block;
-    width: 120px;
-    padding: 10px 20px;
-    border: 2px solid #ccc;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    user-select: none; 
-    margin-top: 10px;
+  display: inline-block;
+  width: 120px;
+  padding: 10px 20px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  margin-top: 10px;
 }
 
 /* Styling for valgte filterbokser */
 .FilterButton.selected {
-    background-color: green;
-    color: #fff;
-    border-color: green;
-    font-weight: bold;
+  background-color: green;
+  color: #fff;
+  border-color: green;
+  font-weight: bold;
 }
-
 
 /* Skjul checkboxen */
 .FilterButton input[type="checkbox"] {
-    display: none;
+  display: none;
 }
 
-.SliderContainer{
-    align-items: left;
+.SliderContainer {
+  align-items: left;
 }
-.SliderContainer input[type="range"]{
-    background-color: green;
+.SliderContainer input[type="range"] {
+  background-color: green;
 }
-
 
 /* Filteringbar */
 .ButtonContainer {
-    flex: 1 1 calc(25% - 10px); 
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    gap: 10px;
-    margin-left: auto; 
+  flex: 1 1 calc(25% - 10px);
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  gap: 10px;
+  margin-left: auto;
 }
 
 .ButtonContainer button {
-    padding: 10px 20px;
-    border: none;
-    background-color:white;
-    border: 2px solid #ccc;
-    color: black;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  border: none;
+  background-color: white;
+  border: 2px solid #ccc;
+  color: black;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .ButtonContainer button:hover {
-    background-color: green;
-    color:white;
+  background-color: green;
+  color: white;
 }
 
-
- h2{
-    text-align: center;
+h2 {
+  text-align: center;
 }
 
 .DestinationOverview {
-    padding-top: 25px;
-    display: flex;
-    flex-wrap: wrap;
+  padding-top: 25px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .SingleDestination {
-    width: 25%; 
-    box-sizing: border-box; 
-    padding: 10px; 
+  width: 25%;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
-
+.DestinationOverview button {
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+  font-style: bold;
+  color: green;
+  cursor: pointer;
+  margin: 0 3px; /* Mindre margin mellom knappene og bildene */
+  align-self: center; /* Plasserer knappene midt i høyden av bildene */
+}

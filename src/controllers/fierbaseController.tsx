@@ -1,6 +1,6 @@
 import { collection } from "@firebase/firestore";
 import { db } from "../config/firebaseConfig";
-import { doc, getDoc, getDocs } from "firebase/firestore";
+import { doc, getDoc, getDocs, addDoc } from "firebase/firestore";
 
 const destinationCollection = collection(db, "Destination");
 
@@ -71,5 +71,14 @@ export async function getDestination(id: string): Promise<DestinationData> {
   } catch (error) {
     console.error("Error getting documents: ", error);
     return createMissingData();
+  }
+}
+
+export async function postNewDestination(newDestination: DestinationData) {
+  try {
+    const docRef = await addDoc(collection(db, "Destination"), newDestination);
+    return docRef.id;
+  } catch (e) {
+    console.error("Error adding document: ", e);
   }
 }

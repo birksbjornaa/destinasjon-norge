@@ -2,7 +2,7 @@ import Home from "./pages/home";
 import DestinationChooser from "./pages/DestinationChooser";
 import DestinationDetailed from "./pages/DestinationDetailed";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
-import EditDestination from "./pages/NewDestination";
+import NewDestination from "./pages/NewDestination";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/destinationChooser" element={<DestinationChooser />} />
           <Route path="/destination/:id" element={<DestinationDetailed />} />
-          <Route path="/editdestination" element={<EditDestination />} />
+          <Route path="/newdestination" element={<NewDestination/>} />
         </Routes>
       </BrowserRouter>
     </div>

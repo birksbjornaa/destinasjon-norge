@@ -1,7 +1,7 @@
 import "../css/Main.css";
 import profile from "../assets/profile.jpg";
 import React, { useState } from "react";
-import { Dropdown, Navbar, Container } from "react-bootstrap";
+import { Navbar, Container } from "react-bootstrap";
 
 import imgLogo from "../assets/LogoDestinasjonNorge.png";
 
@@ -56,11 +56,3 @@ const NavBar: React.FC<navBarProps> = ({ handleLogoHomeClicked }) => {
 
 export default NavBar;
 
-{
-  /* <ul>
-    <Logo />
-    <li>Home</li>
-    <li>Profile</li>
-    <li>Settings</li>
-</ul> */
-}

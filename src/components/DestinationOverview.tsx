@@ -13,6 +13,9 @@ const DestinationsOverview: React.FC<MainGalleryProps> = ({ destinations }) => {
           <Destination
             name={destination.name as string}
             imageSrc={destination.imageSrc as string}
+            id={destination.id}
+            region={destination.region}
+            description={destination.description}
           />
         </div>
       ))}

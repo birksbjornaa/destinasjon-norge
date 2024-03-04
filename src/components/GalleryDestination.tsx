@@ -1,20 +1,11 @@
 import "../css/Main.css";
 
 export interface DestinationProps {
-  id: string;
   name: string;
   imageSrc: string;
-  region: string;
-  description: string;
 }
 
-function Destination({
-  id,
-  name,
-  imageSrc,
-  region,
-  description,
-}: DestinationProps) {
+function Destination({ name, imageSrc }: DestinationProps) {
   return (
     <div className="Destination">
       <img src={imageSrc} alt={name} className="destination-image" />

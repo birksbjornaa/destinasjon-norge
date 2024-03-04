@@ -2,7 +2,7 @@ import Home from "./pages/home";
 import DestinationChooser from "./pages/DestinationChooser";
 import DestinationDetailed from "./pages/DestinationDetailed";
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
-import EditDestination from "./pages/EditDestination";
+import EditDestination from "./pages/NewDestination";
 
 function App() {
   return (

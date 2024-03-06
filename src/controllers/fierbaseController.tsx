@@ -76,7 +76,19 @@ export async function getDestination(id: string): Promise<DestinationData> {
 
 export async function postNewDestination(newDestination: DestinationData) {
   try {
-    const docRef = await addDoc(collection(db, "Destination"), newDestination);
+    const newDestinationFormated = {
+      navn: newDestination.name as string,
+      bilde: newDestination.imageSrc as string,
+      fylke: newDestination.region as string,
+      beskrivelse: newDestination.description as string,
+      tags: newDestination.tags as string[],
+      yrid: newDestination.yrid as string,
+    };
+
+    const docRef = await addDoc(
+      collection(db, "Destination"),
+      newDestinationFormated
+    );
     return docRef.id;
   } catch (e) {
     console.error("Error adding document (destination): ", e);

@@ -36,10 +36,7 @@ const NavBar: React.FC<navBarProps> = ({ handleLogoHomeClicked }) => {
           {showMenu && (
             <ul className="menu-list">
               <li className="menu">
-                <button onClick={() => console.log("Navigating to Home")}>
-                  Home
-                </button>
-                <button onClick={() => handleLogoHomeClicked()}>Home</button>
+
               </li>
               {LoggedIn ? (
                 <li>

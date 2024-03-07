@@ -22,7 +22,6 @@ export default function DestinationDetailed() {
 
   const fetchAndSetData = async () => {
     const fetchedDestination = await getDestination(currentDestinationId);
-    console.log(destination.name);
     setDestination(fetchedDestination);
   };
 

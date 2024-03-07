@@ -61,7 +61,7 @@ export async function getDestination(id: string): Promise<DestinationData> {
         imageSrc: snapData.bilde as string,
         region: snapData.fylke as string,
         description: snapData.beskrivelse as string,
-        price: snapData.pris as number,
+        price: snapData.prisnivaa as number,
         tags: snapData.tags as string[],
         yrid: snapData.yrid as string,
       };
@@ -81,6 +81,7 @@ export async function postNewDestination(newDestination: DestinationData) {
       bilde: newDestination.imageSrc as string,
       fylke: newDestination.region as string,
       beskrivelse: newDestination.description as string,
+      prisnivaa: newDestination.price as number,
       tags: newDestination.tags as string[],
       yrid: newDestination.yrid as string,
     };
@@ -103,6 +104,7 @@ export async function updateExsistingDestination(destination: DestinationData) {
       bilde: destination.imageSrc as string,
       fylke: destination.region as string,
       beskrivelse: destination.description as string,
+      prisnivaa: destination.price as number,
       tags: destination.tags as string[],
       yrid: destination.yrid as string,
     };

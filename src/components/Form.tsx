@@ -3,6 +3,7 @@ import {
   DestinationData,
   postNewDestination,
 } from "../controllers/fierbaseController";
+import "../css/CreateDestination.css";
 
 interface FormProps {
   goToDestination: (destinationId: string) => void;
@@ -95,7 +96,7 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
   return (
     <div className="FormBody">
       <div className="FormName">
-        <h3>Navn på venstre side: </h3>
+        <h3>Destinasjons Navn: </h3>
         <input
           type="text"
           minLength={2}
@@ -132,11 +133,11 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
         <input type="text" value={yrid} onChange={handleYrIdChange} />
       </div>
       <div className="FormPicture">
-        <h3>Picture URL: </h3>
+        <h3>BILDE URL: </h3>
         <input type="url" value={imageSrc} onChange={handlePictureUrlChange} />
       </div>
       <div className="FormInfo">
-        <h3>Form Info: </h3>
+        <h3>Destinasjons Informasjon: </h3>
         <textarea
           minLength={20}
           maxLength={300}
@@ -155,8 +156,8 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
           />
         ))}
       </div>
-      <button onClick={() => handleSubmit(getDestinationData())}>
-        Bekreft endringer
+      <button className="FormButton" onClick={() => handleSubmit(getDestinationData())}>
+        Legg til Destinasjon
       </button>
     </div>
   );

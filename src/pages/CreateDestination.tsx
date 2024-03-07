@@ -15,7 +15,6 @@ export default function CreateDestination() {
   return (
     <div>
       <NavBar handleLogoHomeClicked={goToHomePage} />
-      <h1>Her kommer mulighet for å leggtil/endre/slette destinasjoner</h1>
       <Form goToDestination={goToNewDestination} />
     </div>
   );

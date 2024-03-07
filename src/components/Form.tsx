@@ -22,12 +22,13 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
   const [imageSrc, setImageSrc] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [tags, setTags] = useState<Tag[]>([
-    { label: "By", isChecked: false },
-    { label: "Natur", isChecked: false },
-    { label: "Historie", isChecked: false },
-    { label: "Kultur", isChecked: false },
-    { label: "Mat", isChecked: false },
-    { label: "Sport", isChecked: false },
+    { label: "by", isChecked: false },
+    { label: "natur", isChecked: false },
+    { label: "historie", isChecked: false },
+    { label: "kultur", isChecked: false },
+    { label: "mat", isChecked: false },
+    { label: "sport", isChecked: false },
+    //Always keep letters in label lowercase
   ]);
 
   // Create a function that create a DestinationData of the current state
@@ -156,7 +157,10 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
           />
         ))}
       </div>
-      <button className="FormButton" onClick={() => handleSubmit(getDestinationData())}>
+      <button
+        className="FormButton"
+        onClick={() => handleSubmit(getDestinationData())}
+      >
         Legg til Destinasjon
       </button>
     </div>

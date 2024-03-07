@@ -56,6 +56,10 @@ export default function DestinationDetailed() {
         <div className="image-container">
           <img src={destination.imageSrc} alt="Image" className="image" />
         </div>
+        <div className="edit-delete-container">
+          <button className="edit-button" id="Edit">Rediger</button>
+          <button className="delete-button" id="Delete">Slett</button>
+        </div>
         <div className="tags-ratings-container">
           <div className="tags">
             {destination.tags.map((tag) => (

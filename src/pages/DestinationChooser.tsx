@@ -48,12 +48,11 @@ export default function DestinationChooser() {
     <div>
       <NavBar handleLogoHomeClicked={goToHomePage} />
       <FilteringBar applyFilters={applyFilters} />
-      <div className="DestinationOverview">
-        <DestinationsOverview
-          destinations={destinations}
-          handleTileClicked={handleDestinationTileClicked}
-        />
-      </div>
+
+      <DestinationsOverview
+        destinations={destinations}
+        handleTileClicked={handleDestinationTileClicked}
+      />
     </div>
   );
 }

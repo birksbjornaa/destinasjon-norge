@@ -2,23 +2,31 @@ import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged } from
 import { useNavigate } from 'react-router-dom';
 import NavBar from "../components/NavBar";
 import { useEffect } from "react";
-
+import { getUser } from "../controllers/userController"
 
 let LoggedIn: boolean = false;
 
-export default function Login() {
+export function Login() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
   
   const handleLogin = () => {
     signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log(result);
+    .then(async (result) => {
       LoggedIn = true;
+
+      const token = await result.user.getIdToken();
+      if (result.user.email) {
+        const email: string = result.user.email;
+        getUser(token, email);
+      } else {
+        console.log("No user email");
+      }
+
       navigate('/');
     }).catch((error) => {
-      console.log(error);
+      console.log('handlelogin', error);
     });
   };
 

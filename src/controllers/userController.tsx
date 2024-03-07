@@ -1,24 +1,16 @@
 import { collection } from "@firebase/firestore";
-import { getAuth } from "firebase/auth";
-import { doc, getDoc, getDocs } from "firebase/firestore";
+import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 
 
 const usersCollection = collection(db, "Users");
-const auth = getAuth();
-const user = auth.currentUser;
-const token = await user?.getIdToken();
-
 
 export interface UserData {
   token: string;
   email: string;
   role: string;
-  // Her kan man legge inn mer data senere
-  // admin 0 eller 1?
 }
 
-// Sometimes null is not okay, so this is returned instead
 export function createMissingData(): UserData {
   return {
     token: "missing",
@@ -46,63 +38,64 @@ export async function getAllTokens(): Promise<string[]> {
   const tokens: string[] = [];
 
   allUsers.forEach(user => {
-    tokens.push(user.token); // må endre uid til token inne i firebase
+    tokens.push(user.token);
   });
 
   return tokens;
 }
 
-export async function getUser(uid: string): Promise<UserData> {
-  try {
-    const docRef = doc(db, "User", uid);
-    const snapshot = await getDoc(docRef);
-
-    const snapData = snapshot.data();
-    if (snapData) {
-      return {
-        token: snapData.uid as string,
-        email: snapData.email as string,
-        role: snapData.role as string
-      };
-    } else {
-      return createMissingData();
-    }
-  } catch (error) {
-    console.error("Error getting users: ", error);
-    return createMissingData();
-  }
-}
-
-
-if (user !== null) {
-  const tokens: string[] = await getAllTokens();
-
-  if(tokens.includes(token)) {
-    
-  }
-  const email = user.email;
-
-
-  // The user's ID, unique to the Firebase project. Do NOT use
-  // this value to authenticate with your backend server, if
-  // you have one. Use User.getToken() instead.
-}
-
-export async function getUser(currentToken: string) {
+export async function checkIfUserIsAdmin(currentToken: undefined) {
   const userSnapshot = await getDocs(usersCollection);
   const users = userSnapshot.docs.map(doc => doc.data());
-  const docRef = doc(db, "Users", token);
-  const snapshot = await getDoc(docRef);
-  const snapData = snapshot.data();
-
 
   for (let user of users) {
     if (user.token === currentToken) {
-      return {
-        token: snapData.uid as string,
-        email: snapData.email as string,
-        role: snapData.role as string
-      };
+      const docRef = doc(db, "Users", user.token);
+      const snapshot = await getDoc(docRef);
+      const snapData = snapshot.data();
+      if (snapData) {
+        return snapData.role === "admin";
+      } else {
+        return false;
+      }
     }
+  }
+}
+
+export async function checkIfUserInDatabase(currentToken: string) {
+  const userSnapshot = await getDocs(usersCollection);
+  const users = userSnapshot.docs.map(doc => doc.data());
+
+  for (let user of users) {
+    if (user.token === currentToken) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export async function getUser(currentToken: string, currentEmail: string) {
+  const userSnapshot = await getDocs(usersCollection);
+  const users = userSnapshot.docs.map(doc => doc.data());
+
+  if(await checkIfUserInDatabase(currentToken)){
+    for (let user of users) {
+      if (user.token === currentToken) {
+        const docRef = doc(db, "Users", user.token);
+        const snapshot = await getDoc(docRef);
+        const snapData = snapshot.data();
+        if (snapData) {
+          return snapData;
+        }
+      }
+    }
+  } else {
+    const newUser = {
+      token: currentToken,
+      email: currentEmail,
+      role: "user"
+    };
+    await setDoc(doc(db, "Users", currentToken), newUser);
+    
   }
 }

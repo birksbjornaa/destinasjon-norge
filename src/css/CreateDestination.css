@@ -1,0 +1,72 @@
+.FormBody {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto; /* Sentrerer boksen horisontalt */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 100px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.FormBody h3 {
+    margin: 10px 0;
+}
+
+.FormInput {
+    margin-bottom: 20px;
+}
+
+.FormInput label {
+    display: block;
+    font-weight: bold;
+}
+
+.FormInput input,
+.FormInput textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.FormTags {
+    margin-bottom: 20px;
+}
+
+.FilterButton {
+    display: inline-block;
+    margin-right: 10px;
+    background-color: #eee;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.FilterButton.selected {
+    background-color:green;
+    color: #fff;
+}
+
+.FormButton {
+    background-color: green;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.FormButton:hover {
+    background-color: darkgreen;
+}
+.FormInfo textarea {
+    height: 150px; /* Endre høyden her etter behov */
+    width: 400px;
+}
+

@@ -45,7 +45,7 @@ const MainGallery: React.FC<MainGalleryProps> = ({
               imageSrc={destination.imageSrc}
               id={destination.id}
               region={destination.region}
-              description={destination.region}
+              description={destination.description}
             />
           </button>
         ))}

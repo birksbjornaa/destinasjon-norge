@@ -39,12 +39,20 @@ export default function DestinationChooser() {
     navigate("/");
   };
 
+  let navigate1 = useNavigate();
+  const handleDestinationTileClicked = (destinationId: string) => {
+    navigate1("/destination/" + destinationId);
+  };
+
   return (
     <div>
       <NavBar handleLogoHomeClicked={goToHomePage} />
       <FilteringBar applyFilters={applyFilters} />
       <div className="DestinationOverview">
-        <DestinationsOverview destinations={destinations} />
+        <DestinationsOverview
+          destinations={destinations}
+          handleTileClicked={handleDestinationTileClicked}
+        />
       </div>
     </div>
   );

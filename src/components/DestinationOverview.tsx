@@ -3,20 +3,27 @@ import "../css/DestinationChooser.css";
 
 export interface MainGalleryProps {
   destinations: DestinationProps[];
+  handleTileClicked: (destinationID: string) => void;
 }
 
-const DestinationsOverview: React.FC<MainGalleryProps> = ({ destinations }) => {
+const DestinationsOverview: React.FC<MainGalleryProps> = ({
+  destinations,
+  handleTileClicked,
+}) => {
   return (
     <div className="DestinationOverview">
       {destinations.map((destination) => (
         <div key={destination.name} className="SingleDestination">
-          <Destination
-            name={destination.name as string}
-            imageSrc={destination.imageSrc as string}
-            id={destination.id}
-            region={destination.region}
-            description={destination.description}
-          />
+          <button onClick={() => handleTileClicked(destination.id)}>
+            <Destination
+              name={destination.name}
+              imageSrc={destination.imageSrc}
+              key={destination.id}
+              id={destination.id}
+              region={destination.region}
+              description={destination.region}
+            />
+          </button>
         </div>
       ))}
     </div>

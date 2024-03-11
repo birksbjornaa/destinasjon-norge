@@ -181,3 +181,20 @@ ul li button {
   border: 1px solid green;
   border-radius: 5px;
 }
+
+.modern-button {
+  background-color: rgb(203, 216, 182);;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.modern-button:hover {
+  background-color: #45a049;
+}

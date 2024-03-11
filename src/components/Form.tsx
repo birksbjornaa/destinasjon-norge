@@ -6,7 +6,7 @@ import {
 } from "../controllers/fierbaseController";
 import "../css/CreateDestination.css";
 
-interface FormProps {
+export interface FormProps {
   goToDestination: (destinationId: string) => void;
 }
 

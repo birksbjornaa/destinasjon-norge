@@ -8,25 +8,39 @@ import {
 } from "../controllers/fierbaseController";
 import "../css/CreateDestination.css";
 import { useParams } from "react-router-dom";
-import Destination from "./GalleryDestination";
+
 
 interface FormProps {
   goToDestination: (destinationId: string) => void;
 }
-const [destination, setDestination] = useState(createMissingData());
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+
+const Form: React.FC<FormProps> = ({ goToDestination }) => {
+  const [destination, setDestination] = useState(createMissingData());
+
+  const { id } = useParams<{ id: string }>();
+  let currentDestinationId: string = id as string;
 
   useEffect(() => {
     fetchAndSetData();
   }, []);
 
-  const { id } = useParams<{ id: string }>();
-  let currentDestinationId: string = id as string;
 
   const fetchAndSetData = async () => {
     const fetchedDestination = await getDestination(currentDestinationId);
     console.log(destination.name);
     setDestination(fetchedDestination);
+    setName(fetchedDestination.name);
+    setRegion(fetchedDestination.region);
+    setPrice(fetchedDestination.price);
+    setYrId(fetchedDestination.yrid);
+    setImageSrc(fetchedDestination.imageSrc);
+    setDescription(fetchedDestination.description);
+
+    const updatedTags = tags.map((tag) => ({
+      ...tag,
+      isChecked: fetchedDestination.tags.includes(tag.label),
+    }));
+    setTags(updatedTags);
   };
 
 interface Tag {
@@ -34,13 +48,12 @@ interface Tag {
   isChecked: boolean;
 }
 
-const Form: React.FC<FormProps> = ({ goToDestination }) => {
-  const [name, setName] = useState<string>(destination.name);
-  const [region, setRegion] = useState<string>(destination.region);
-  const [price, setPrice] = useState<number>(destination.price);
-  const [yrid, setYrId] = useState<string>(destination.yrid);
-  const [imageSrc, setImageSrc] = useState<string>(destination.imageSrc);
-  const [description, setDescription] = useState<string>(destination.description);
+  const [name, setName] = useState<string>("");
+  const [region, setRegion] = useState<string>("");
+  const [price, setPrice] = useState<number>(0);
+  const [yrid, setYrId] = useState<string>("");
+  const [imageSrc, setImageSrc] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const [tags, setTags] = useState<Tag[]>([
     { label: "By", isChecked: false },
     { label: "Natur", isChecked: false },
@@ -51,9 +64,9 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
   ]);
 
   // Create a function that create a DestinationData of the current state
-  function getDestinationData(): DestinationData {
+  function getDestinationFromForm(): DestinationData {
     return {
-      id: "",
+      id: destination.id,
       name: name,
       imageSrc: imageSrc,
       region: region,
@@ -176,8 +189,8 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
           />
         ))}
       </div>
-      <button className="FormButton" onClick={() => handleSubmit(getDestinationData())}>
-        Legg til Destinasjon
+      <button className="FormButton" onClick={() => handleSubmit(getDestinationFromForm())}>
+        Endre Destinasjonen
       </button>
     </div>
   );

@@ -35,6 +35,15 @@ export default function DestinationDetailed() {
     navigate("/");
   };
 
+
+  let navigate1 = useNavigate();
+  const handleDestinationTileClicked = (destinationId: string) => {
+    navigate1("/edit/" + destinationId);
+  };
+
+
+
+
   return (
     <div className="destinationDetailed">
       <NavBar handleLogoHomeClicked={goToHomePage} />
@@ -57,7 +66,7 @@ export default function DestinationDetailed() {
           <img src={destination.imageSrc} alt="Image" className="image" />
         </div>
         <div className="edit-delete-container">
-          <button className="edit-button" id="Edit">Rediger</button>
+        <button className="edit-button" id="Edit" onClick={() => handleDestinationTileClicked(destination.id)}>Rediger</button>
           <button className="delete-button" id="Delete">Slett</button>
         </div>
         <div className="tags-ratings-container">

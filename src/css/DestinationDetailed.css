@@ -14,7 +14,9 @@ body {
     text-align: center;
   }
   
-
+  #delete {
+    background-color:red;
+  }
   
   .image {
     width: 50%;

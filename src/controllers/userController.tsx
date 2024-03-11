@@ -2,7 +2,6 @@ import { collection } from "@firebase/firestore";
 import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 
-
 const usersCollection = collection(db, "Users");
 
 export interface UserData {

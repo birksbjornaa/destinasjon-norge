@@ -63,7 +63,6 @@ interface Tag {
     { label: "Sport", isChecked: false },
   ]);
 
-  // Create a function that create a DestinationData of the current state
   function getDestinationFromForm(): DestinationData {
     return {
       id: destination.id,

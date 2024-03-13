@@ -35,10 +35,8 @@ export default function DestinationDetailed() {
     navigate("/");
   };
 
-
-  let navigate1 = useNavigate();
   const handleDestinationTileClicked = (destinationId: string) => {
-    navigate1("/edit/" + destinationId);
+    navigate("/edit/" + destinationId);
   };
 
 

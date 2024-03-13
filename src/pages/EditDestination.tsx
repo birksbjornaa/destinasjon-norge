@@ -1,6 +1,6 @@
 import NavBar from "../components/NavBar";
 import { useNavigate, useParams } from "react-router-dom";
-import FormChange from "../components/FormChange";
+import EditForm from "../components/EditForm";
 
 export default function AdminOverview() {
 
@@ -10,7 +10,7 @@ export default function AdminOverview() {
     };
 
 
-    const goToeditDestination = (destinationId: string) => {
+    const goToEditDestination = (destinationId: string) => {
       navigate("/destination/" + destinationId);
     };
 
@@ -18,7 +18,7 @@ export default function AdminOverview() {
 
         <div className="AdminOverview">
           <NavBar handleLogoHomeClicked={goToHomePage} />
-          <FormChange goToDestination={goToeditDestination}/>
+          <EditForm goToDestination={goToEditDestination}/>
         </div>
 
 

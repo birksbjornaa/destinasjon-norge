@@ -2,7 +2,6 @@ import { collection } from "@firebase/firestore";
 import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 
-
 const usersCollection = collection(db, "Users");
 
 export interface UserData {
@@ -99,3 +98,6 @@ export async function getUser(currentToken: string, currentEmail: string) {
     
   }
 }
+
+// Må lage en funksjon som lagrer tags til profilen
+// export default function saveTagsToProfile(token: string,)

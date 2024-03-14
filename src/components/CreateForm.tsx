@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   DestinationData,
+  getAllDestinations,
   postNewDestination,
 } from "../controllers/fierbaseController";
 import "../css/CreateDestination.css";
@@ -15,6 +16,7 @@ interface Tag {
 }
 
 const Form: React.FC<FormProps> = ({ goToDestination }) => {
+  const [errorMessage, setErrormessage] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [region, setRegion] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
@@ -46,9 +48,15 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
   }
 
   useEffect(() => {
-    console.log(tags);
-    console.log(price);
+    fetchAndSetData();
   }, [tags, price]);
+
+  const [destinations, setDestinations] = useState<DestinationData[]>([]);
+
+  const fetchAndSetData = async () => {
+    const destinations = await getAllDestinations();
+    setDestinations(destinations);
+  };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -88,11 +96,63 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
   };
 
   const handleSubmit = async (newDestination: DestinationData) => {
+    try {
+      validateDestination(newDestination);
+    } catch (e) {
+      setErrormessage((e as Error).message); // Accessing the message property
+      excecuteShake();
+      return;
+    }
+
     const newDestinationId = await postNewDestination(newDestination);
     if (newDestinationId) {
       goToDestination(newDestinationId);
     }
   };
+
+  const [shake, setShake] = useState(false);
+
+  const excecuteShake = () => {
+    setShake(true);
+    setTimeout(() => {
+      setShake(false);
+    }, 500); // (0.5s)
+  };
+
+  function validateDestination(newDestination: DestinationData) {
+    if (newDestination.name.length < 2) {
+      throw new Error("Navn er for kort, minimum 2 tegn");
+    }
+
+    if (newDestination.region.length < 2) {
+      throw new Error("Region er for kort, minimum 2 tegn");
+    }
+    if (newDestination.price < 1 || newDestination.price > 10) {
+      throw new Error("Prisnivå må settes");
+    }
+    if (!newDestination.yrid.includes("-")) {
+      throw new Error("YrID har feil format (x-xxxxx)");
+    }
+    if (newDestination.imageSrc.length === 0) {
+      throw new Error("Bilde url er tom");
+    }
+    if (newDestination.description.length < 10) {
+      throw new Error("Beskrivelse er for kort, minimum 10 tegn");
+    }
+
+    destinations.map((destination) => {
+      if (
+        destination.name.toLowerCase() === newDestination.name.toLowerCase()
+      ) {
+        throw new Error("Navn er allerede i bruk");
+      }
+      if (
+        destination.yrid.toLowerCase() === newDestination.yrid.toLowerCase()
+      ) {
+        throw new Error("YrID er allerede i bruk");
+      }
+    });
+  }
 
   return (
     <div className="FormBody">
@@ -156,6 +216,9 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
             onChange={handleTagChange}
           />
         ))}
+      </div>
+      <div className="error-message">
+        <p className={shake ? "shake-animation" : ""}>{errorMessage}</p>
       </div>
       <button
         className="FormButton"

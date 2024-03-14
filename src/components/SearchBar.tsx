@@ -6,7 +6,7 @@ const SearchBar: React.FC = () => {
   return (
     <div className="search-bar">
       <Link to="/destinationChooser" className="search-link">
-        <input type="text" placeholder="Hvor vil du dra?" />
+        <button className = "modern-button">Hvor vil du dra?</button>
       </Link>
     </div>
   );

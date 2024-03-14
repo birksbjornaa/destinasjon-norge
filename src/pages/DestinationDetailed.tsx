@@ -47,15 +47,12 @@ export default function DestinationDetailed() {
     navigate("/edit/" + destinationId);
   };
 
-
-
-
   return (
     <div className="destinationDetailed">
       <NavBar handleLogoHomeClicked={goToHomePage} />
       <div className="container">
         <h1 className="header">{destination.name}</h1>
-
+  
         <button
           className="favorite-button"
           id="toggleButton"
@@ -68,20 +65,19 @@ export default function DestinationDetailed() {
             alt={isLiked ? "Like" : "Unlike"}
           />
         </button>
-
-
+  
         <div className="image-container">
           <img src={destination.imageSrc} alt="Image" className="image" />
-        </div><br></br>
         </div>
+        <br />
         <div className="edit-delete-container">
-        <button className="edit-button" id="Edit" onClick={() => handleDestinationTileClicked(destination.id)}>Rediger</button>
-        <DeleteButton destinationId={currentDestinationId} />{}
+          <button className="edit-button" id="Edit" onClick={() => handleDestinationTileClicked(destination.id)}>Rediger</button>
+          <DeleteButton destinationId={currentDestinationId} />
         </div>
         <div className="tags-ratings-container">
           <div className="tags">
             {destination.tags.map((tag) => (
-              <ul key={tag}> {/* Add key prop for list items */}
+              <ul key={tag}>
                 <li>#{tag}</li>
               </ul>
             ))}
@@ -95,7 +91,7 @@ export default function DestinationDetailed() {
         <a
           href={`https://www.yr.no/nb/v%C3%A6rvarsel/daglig-tabell/${destination.yrid}`}
           target="_blank"
-          rel="noopener noreferrer" // Add rel attribute for security
+          rel="noopener noreferrer"
         >
           <img
             src={`https://www.yr.no/nb/innhold/${destination.yrid}/meteogram.svg`}
@@ -107,4 +103,5 @@ export default function DestinationDetailed() {
       <h2 className="sub-header">Kommentarer</h2>
     </div>
   );
+  
 }

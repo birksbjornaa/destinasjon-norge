@@ -165,6 +165,7 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
           required
           value={name}
           onChange={handleNameChange}
+          data-testid="input-name"
         />
       </div>
       <div className="FormRegion">

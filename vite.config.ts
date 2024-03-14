@@ -8,8 +8,5 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: './src/test/setup.tsx', 
-    cache: {
-      dir: './node_modules/.vitest',
-    },
   },
 })

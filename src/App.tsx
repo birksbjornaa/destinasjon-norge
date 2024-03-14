@@ -4,7 +4,6 @@ import { Login } from "./pages/Login";
 import DestinationDetailed from "./pages/DestinationDetailed";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import EditDestination from "./pages/EditDestination";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import CreateDestination from "./pages/CreateDestination";
 import { Profile } from "./pages/Profile";
 

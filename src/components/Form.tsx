@@ -99,14 +99,20 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
     try {
       validateDestination(newDestination);
     } catch (e) {
-      setErrormessage((e as Error).message); // Accessing the message property
+      setErrormessage((e as Error).message);
       excecuteShake();
       return;
     }
 
-    const newDestinationId = await postNewDestination(newDestination);
-    if (newDestinationId) {
-      goToDestination(newDestinationId);
+    try {
+      const newDestinationId = await postNewDestination(newDestination);
+
+      if (newDestinationId) {
+        goToDestination(newDestinationId);
+      }
+    } catch (e) {
+      setErrormessage("Feil med å legge til destinasjon, prøv igjen senere.");
+      excecuteShake();
     }
   };
 

@@ -3,6 +3,8 @@ import { createMissingData, getDestination, deleteDestination } from "../control
 import "../css/DestinationDetailed.css";
 import Like from "../assets/Like.png";
 import Unlike from "../assets/Unlike.png";
+import Visited from "../assets/Visited.png";
+import Unvisited from "../assets/Unvisited.png";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { currentToken } from "./Login";
@@ -12,6 +14,7 @@ import DeleteButton from "../components/DeleteButton"; // Import the DeleteButto
 export default function DestinationDetailed() {
   const [destination, setDestination] = useState(createMissingData());
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isVisited, setIsVisited] = useState<boolean>(false);
 
   useEffect(() => {
     fetchAndSetData();
@@ -38,6 +41,10 @@ useEffect(() => {
 
   const toggleLike = () => {
     setIsLiked((prevIsLiked) => !prevIsLiked);
+  };
+
+  const toggleLike2 = () => {
+    setIsVisited((prevIsVisited) => !prevIsVisited);
   };
 
   const handleDelete = async () => {
@@ -77,6 +84,21 @@ useEffect(() => {
             src={isLiked ? Like : Unlike}
             alt={isLiked ? "Like" : "Unlike"}
           />
+        </button>
+
+        <button
+          className="visited-button"
+          id="toggleButton2"
+          onClick={toggleLike2}
+        >
+
+          <img
+            className="visited"
+            id="image2"
+            src={isVisited ? Visited : Unvisited}
+            alt={isVisited ? "Visited" : "Unvisited"}
+          />
+
         </button>
   
         <div className="image-container">

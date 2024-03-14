@@ -9,6 +9,23 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.profile-page h2 {
+  margin-top: 100px;
+  font-size: 30px;
+  font-family: monospace, Arial, sans-serif;
+  /* color: green; */
+  color: rgb(124, 141, 99);
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.profile-page p {
+  font-family: Arial, sans-serif;
+  color: rgb(146, 148, 142);
+  text-align: center;
+  flex-wrap: wrap;
+}
+
 .profile-image {
   width: 150px;
   height: 150px;

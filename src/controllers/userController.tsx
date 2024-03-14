@@ -98,3 +98,6 @@ export async function getUser(currentToken: string, currentEmail: string) {
     
   }
 }
+
+// Må lage en funksjon som lagrer tags til profilen
+// export default function saveTagsToProfile(token: string,)

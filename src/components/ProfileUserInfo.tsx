@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import profilePicture from "../assets/profilePicture.png";
-import { currentUserEmail } from "../pages/Login";
-import '../css/Profile.css';
 import MainGallery from "../components/MainGallery";
-import FilteringBar from './FilteringBar';
 import { getAllDestinations } from '../controllers/fierbaseController';
+import '../css/Profile.css';
+import '../css/Main.css';
+import { currentUserEmail } from "../pages/Login";
+import FilteringBar from './FilteringBar';
 import { DestinationProps } from './GalleryDestination';
 
 
@@ -19,23 +21,68 @@ const UserProfile: React.FC = () => {
     const destinations = await getAllDestinations();
     setDestinations(destinations);
   };
+
+  const applyFilters = async (tags: string[], price: number) => {
+    const filteredDestinations = (await getAllDestinations()).filter(
+      (destination) => {
+        console.log(destination.tags);
+        return (
+          destination.price <= price &&
+          tags.filter((tag) => !destination.tags.includes(tag)).length == 0
+        );
+      }
+    );
+    setDestinations(filteredDestinations);
+  };
+  
+  // må lage en const for å si hva som skjer når du trykker på knappen ved filterne
+  // const saveFiltersToProfile
+  const navigate = useNavigate();
+  
+  const handleDestinationTileClicked = (destinationId: string) => {
+    navigate("/destination/" + destinationId);
+  };
+
   return (
-    <div className="user-profile">
-      <div className="profile-image">
-        <img src={profilePicture} alt="Profile" />
+    <div className="profile-page">
+      <div className="user-profile">
+        <div className="profile-image">
+          <img src={profilePicture} alt="Profile" />
+        </div>
+        <div className="email">
+          <p>{currentUserEmail}</p>
+          <br></br>
+          <p>Bla ned for å se en oversikt over dine foretrukne tags, dine besøkte <br></br>destinasjoner, favorittdestinasjoner og dine egne vurderinger</p>
+        </div>
       </div>
-      <div className="email">
-        <p>{currentUserEmail}</p>
-      </div>
+      {/* finne en måte vi ikke får med prisnivå? */}
       <div className="tags">
-        <FilteringBa
+      <h2>Mine foretrukne tags</h2>
+        <FilteringBar applyFilters={applyFilters} />
       </div>
       <div className="visited">
-      <MainGallery
-          destinations={destinations}
-          handleTileClicked={handleDestinationTileClicked}
-          neverShowArrows={false}
-        />
+        <h2>Besøkte destinasjoner</h2>
+        <MainGallery
+            destinations={destinations}
+            // handleTileClicked={saveFiltersToProfile}
+            handleTileClicked={handleDestinationTileClicked}
+            neverShowArrows={false}
+          />
+      </div>
+      <div className="favourite">
+        <h2>Mine favorittdestinasjoner</h2>
+        <MainGallery
+            destinations={destinations}
+            // handleTileClicked={saveFiltersToProfile}
+            handleTileClicked={handleDestinationTileClicked}
+            neverShowArrows={false}
+          />
+      </div>
+      <div>
+        <h2>Mine kommentarer</h2>
+        <p>Her vil det stå kommentarer når vi har lagt til rette for det</p>
+        <br></br>
+        <br></br>
       </div>
     </div>
   );

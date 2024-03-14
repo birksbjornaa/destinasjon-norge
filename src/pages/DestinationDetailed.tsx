@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  createMissingData,
-  getDestination,
-} from "../controllers/fierbaseController";
+import { createMissingData, getDestination, deleteDestination } from "../controllers/fierbaseController";
 import "../css/DestinationDetailed.css";
 import Like from "../assets/Like.png";
 import Unlike from "../assets/Unlike.png";
@@ -10,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { currentToken } from "./Login";
 import { checkIfUserIsAdmin } from "../controllers/userController";
+import DeleteButton from "../components/DeleteButton"; // Import the DeleteButton component
 
 export default function DestinationDetailed() {
   const [destination, setDestination] = useState(createMissingData());
@@ -42,6 +40,17 @@ useEffect(() => {
     setIsLiked((prevIsLiked) => !prevIsLiked);
   };
 
+  const handleDelete = async () => {
+    try {
+      await deleteDestination(currentDestinationId);
+      alert("Destination deleted successfully!"); // Optionally provide feedback to the user
+      navigate("/");
+    } catch (error) {
+      console.error("Error deleting destination:", error);
+      alert("Failed to delete destination. Please try again later."); // Optionally provide error feedback
+    }
+  };
+
   let navigate = useNavigate();
   const goToHomePage = () => {
     navigate("/");
@@ -56,7 +65,7 @@ useEffect(() => {
       <NavBar handleLogoHomeClicked={goToHomePage} />
       <div className="container">
         <h1 className="header">{destination.name}</h1>
-
+  
         <button
           className="favorite-button"
           id="toggleButton"
@@ -69,9 +78,11 @@ useEffect(() => {
             alt={isLiked ? "Like" : "Unlike"}
           />
         </button>
+  
         <div className="image-container">
           <img src={destination.imageSrc} alt="Image" className="image" />
         </div>
+        <br />
         <div className="edit-delete-container">
           
         { isAdmin && (<>
@@ -83,7 +94,7 @@ useEffect(() => {
         <div className="tags-ratings-container">
           <div className="tags">
             {destination.tags.map((tag) => (
-              <ul>
+              <ul key={tag}>
                 <li>#{tag}</li>
               </ul>
             ))}
@@ -97,6 +108,7 @@ useEffect(() => {
         <a
           href={`https://www.yr.no/nb/v%C3%A6rvarsel/daglig-tabell/${destination.yrid}`}
           target="_blank"
+          rel="noopener noreferrer"
         >
           <img
             src={`https://www.yr.no/nb/innhold/${destination.yrid}/meteogram.svg`}
@@ -108,4 +120,5 @@ useEffect(() => {
       <h2 className="sub-header">Kommentarer</h2>
     </div>
   );
+  
 }

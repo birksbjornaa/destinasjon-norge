@@ -40,24 +40,17 @@ const NavBar: React.FC<navBarProps> = ({ handleLogoHomeClicked }) => {
               </li>
               {LoggedIn ? (
                 <li>
-                  <button onClick={() => console.log("Navigating to Profile")}>
-                    Profile
-                  </button>
+                  <Link to="/profile">
+                    <button>Profile</button>
+                  </Link>
                 </li>
               ) : (
                 <li>
                   <Link to="/login">
-                    <button onClick={() => console.log("Navigating to Login")}>
-                      Login
-                    </button>
+                    <button>Login</button>
                   </Link>
                 </li>
               )}
-              <li>
-                <button onClick={() => console.log("Navigating to Settings")}>
-                  Settings
-                </button>
-              </li>
             </ul>
           )}
         </div>

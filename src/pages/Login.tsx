@@ -1,11 +1,13 @@
 import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import NavBar from "../components/NavBar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getUser } from "../controllers/userController"
 
 let LoggedIn: boolean = false;
 let currentToken: string = "";
+let currentUserEmail: string;
+
 
 export function Login() {
   const auth = getAuth();
@@ -21,6 +23,7 @@ export function Login() {
       if (result.user.email) {
         const email: string = result.user.email;
         currentToken = token;
+        currentUserEmail = email;
         getUser(token, email);
       } else {
         console.log("No user email");
@@ -48,5 +51,6 @@ export function Login() {
 return (<div><NavBar handleLogoHomeClicked={() => navigate("/")}/></div>);
 }
 
-export { LoggedIn , currentToken};
+
+export { LoggedIn, currentUserEmail, currentToken };
   

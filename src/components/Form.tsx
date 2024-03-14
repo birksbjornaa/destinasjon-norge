@@ -177,6 +177,7 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
           required
           value={region}
           onChange={handleRegionChange}
+          data-testid="input-region"
         />
       </div>
       <div className="FormPrice">
@@ -188,15 +189,26 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
           required
           value={price}
           onChange={handlePriceChange}
+          data-testid="input-price"
         />
       </div>
       <div className="FormYrID">
         <h3>YrID: </h3>
-        <input type="text" value={yrid} onChange={handleYrIdChange} />
+        <input
+          type="text"
+          value={yrid}
+          onChange={handleYrIdChange}
+          data-testid="input-yrId"
+        />
       </div>
       <div className="FormPicture">
         <h3>BILDE URL: </h3>
-        <input type="url" value={imageSrc} onChange={handlePictureUrlChange} />
+        <input
+          type="url"
+          value={imageSrc}
+          onChange={handlePictureUrlChange}
+          data-testid="input-picture-url"
+        />
       </div>
       <div className="FormInfo">
         <h3>Destinasjons Informasjon: </h3>
@@ -206,6 +218,7 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
           required
           value={description}
           onChange={handleDescriptionChange}
+          data-testid="input-description"
         />
       </div>
       <div className="FormTags">
@@ -219,11 +232,17 @@ const Form: React.FC<FormProps> = ({ goToDestination }) => {
         ))}
       </div>
       <div className="error-message">
-        <p className={shake ? "shake-animation" : ""}>{errorMessage}</p>
+        <p
+          className={shake ? "shake-animation" : ""}
+          data-testid="error-message-text"
+        >
+          {errorMessage}
+        </p>
       </div>
       <button
         className="FormButton"
         onClick={() => handleSubmit(getDestinationData())}
+        data-testid="submit-button"
       >
         Legg til Destinasjon
       </button>

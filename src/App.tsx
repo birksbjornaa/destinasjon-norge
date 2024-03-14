@@ -3,6 +3,8 @@ import DestinationChooser from "./pages/DestinationChooser";
 import { Login } from "./pages/Login";
 import DestinationDetailed from "./pages/DestinationDetailed";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import EditDestination from "./pages/EditDestination";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
 import CreateDestination from "./pages/CreateDestination";
 import { Profile } from "./pages/Profile";
 
@@ -17,6 +19,7 @@ function App() {
           <Route path="/destination/:id" element={<DestinationDetailed />} />
           <Route path="/createdestination" element={<CreateDestination />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/edit/:id" element={<EditDestination />} />
         </Routes>
       </BrowserRouter>
     </div>

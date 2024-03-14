@@ -14,7 +14,9 @@ body {
     text-align: center;
   }
   
-
+  #delete {
+    background-color:red;
+  }
   
   .image {
     width: 50%;
@@ -29,6 +31,24 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .edit-delete-container {
+    margin-top: 20px;
+    margin-left:550px;
+    margin-right:550px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #Edit {
+    padding:15px;
+  }
+
+  #Delete {
+    background-color: red;
+    padding: 15px;
   }
 
   #textbeskrivelse {

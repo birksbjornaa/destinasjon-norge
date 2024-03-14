@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { createMissingData, getDestination, deleteDestination } from "../controllers/fierbaseController";
+import {
+  createMissingData,
+  getDestination,
+} from "../controllers/fierbaseController";
 import "../css/DestinationDetailed.css";
 import Like from "../assets/Like.png";
 import Unlike from "../assets/Unlike.png";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import DeleteButton from "../components/DeleteButton"; // Import the DeleteButton component
 
 export default function DestinationDetailed() {
   const [destination, setDestination] = useState(createMissingData());
@@ -25,17 +27,6 @@ export default function DestinationDetailed() {
 
   const toggleLike = () => {
     setIsLiked((prevIsLiked) => !prevIsLiked);
-  };
-
-  const handleDelete = async () => {
-    try {
-      await deleteDestination(currentDestinationId);
-      alert("Destination deleted successfully!"); // Optionally provide feedback to the user
-      navigate("/");
-    } catch (error) {
-      console.error("Error deleting destination:", error);
-      alert("Failed to delete destination. Please try again later."); // Optionally provide error feedback
-    }
   };
 
   let navigate = useNavigate();
@@ -68,20 +59,17 @@ export default function DestinationDetailed() {
             alt={isLiked ? "Like" : "Unlike"}
           />
         </button>
-
-
         <div className="image-container">
           <img src={destination.imageSrc} alt="Image" className="image" />
-        </div><br></br>
         </div>
         <div className="edit-delete-container">
         <button className="edit-button" id="Edit" onClick={() => handleDestinationTileClicked(destination.id)}>Rediger</button>
-        <DeleteButton destinationId={currentDestinationId} />{}
+          <button className="delete-button" id="Delete">Slett</button>
         </div>
         <div className="tags-ratings-container">
           <div className="tags">
             {destination.tags.map((tag) => (
-              <ul key={tag}> {/* Add key prop for list items */}
+              <ul>
                 <li>#{tag}</li>
               </ul>
             ))}
@@ -95,7 +83,6 @@ export default function DestinationDetailed() {
         <a
           href={`https://www.yr.no/nb/v%C3%A6rvarsel/daglig-tabell/${destination.yrid}`}
           target="_blank"
-          rel="noopener noreferrer" // Add rel attribute for security
         >
           <img
             src={`https://www.yr.no/nb/innhold/${destination.yrid}/meteogram.svg`}

@@ -5,6 +5,8 @@ import Like from "../assets/Like.png";
 import Unlike from "../assets/Unlike.png";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
+import { currentToken } from "./Login";
+import { checkIfUserIsAdmin } from "../controllers/userController";
 import DeleteButton from "../components/DeleteButton"; // Import the DeleteButton component
 
 export default function DestinationDetailed() {
@@ -14,6 +16,17 @@ export default function DestinationDetailed() {
   useEffect(() => {
     fetchAndSetData();
   }, []);
+
+  const [isAdmin, setIsAdmin] = useState(false);
+
+useEffect(() => {
+  const checkAdminStatus = async () => {
+    const adminStatus = await checkIfUserIsAdmin(currentToken);
+    setIsAdmin(adminStatus);
+  };
+
+  checkAdminStatus();
+}, [currentToken]);
 
   const { id } = useParams<{ id: string }>();
   let currentDestinationId: string = id as string;
@@ -71,8 +84,12 @@ export default function DestinationDetailed() {
         </div>
         <br />
         <div className="edit-delete-container">
-          <button className="edit-button" id="Edit" onClick={() => handleDestinationTileClicked(destination.id)}>Rediger</button>
-          <DeleteButton destinationId={currentDestinationId} />
+          
+        { isAdmin && (<>
+        <button className="edit-button" id="Edit" onClick={() => handleDestinationTileClicked(destination.id)}>Rediger</button>
+          <button className="delete-button" id="Delete">Slett</button>
+          </>
+          )}
         </div>
         <div className="tags-ratings-container">
           <div className="tags">

@@ -43,7 +43,7 @@ export async function getAllTokens(): Promise<string[]> {
   return tokens;
 }
 
-export async function checkIfUserIsAdmin(currentToken: undefined) {
+export async function checkIfUserIsAdmin(currentToken: String) {
   const userSnapshot = await getDocs(usersCollection);
   const users = userSnapshot.docs.map(doc => doc.data());
 
@@ -52,13 +52,14 @@ export async function checkIfUserIsAdmin(currentToken: undefined) {
       const docRef = doc(db, "Users", user.token);
       const snapshot = await getDoc(docRef);
       const snapData = snapshot.data();
-      if (snapData) {
-        return snapData.role === "admin";
+      if (snapData && snapData.role === "admin") {
+        return true;
       } else {
         return false;
       }
     }
   }
+  return false;
 }
 
 export async function checkIfUserInDatabase(currentToken: string) {
@@ -84,7 +85,13 @@ export async function getUser(currentToken: string, currentEmail: string) {
         const snapshot = await getDoc(docRef);
         const snapData = snapshot.data();
         if (snapData) {
-          return snapData;
+          return(
+            {
+              token: snapData.token as string,
+              email: snapData.email as string,
+              role: snapData.role as string
+            }
+          )
         }
       }
     }

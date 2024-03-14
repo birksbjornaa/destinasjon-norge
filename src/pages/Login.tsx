@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import { getUser } from "../controllers/userController"
 
 let LoggedIn: boolean = false;
+let currentToken: string = "";
 let currentUserEmail: string;
+
 
 export function Login() {
   const auth = getAuth();
@@ -19,7 +21,8 @@ export function Login() {
 
       const token = await result.user.getIdToken();
       if (result.user.email) {
-        const email = result.user.email;
+        const email: string = result.user.email;
+        currentToken = token;
         currentUserEmail = email;
         getUser(token, email);
       } else {
@@ -48,5 +51,6 @@ export function Login() {
 return (<div><NavBar handleLogoHomeClicked={() => navigate("/")}/></div>);
 }
 
-export { LoggedIn, currentUserEmail };
+
+export { LoggedIn, currentUserEmail, currentToken };
   

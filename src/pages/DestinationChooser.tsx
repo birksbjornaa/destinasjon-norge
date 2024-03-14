@@ -47,7 +47,7 @@ export default function DestinationChooser() {
   return (
     <div>
       <NavBar handleLogoHomeClicked={goToHomePage} />
-      <FilteringBar applyFilters={applyFilters} />
+      <FilteringBar applyFilters={applyFilters} showSlider={true}/>
 
       <DestinationsOverview
         destinations={destinations}

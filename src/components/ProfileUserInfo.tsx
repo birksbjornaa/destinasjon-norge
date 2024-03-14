@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import profilePicture from "../assets/profilePicture.png";
 import MainGallery from "../components/MainGallery";
 import { getAllDestinations } from '../controllers/fierbaseController';
-import '../css/Profile.css';
 import '../css/Main.css';
+import '../css/Profile.css';
 import { currentUserEmail } from "../pages/Login";
 import FilteringBar from './FilteringBar';
 import { DestinationProps } from './GalleryDestination';
@@ -57,26 +57,32 @@ const UserProfile: React.FC = () => {
       </div>
       {/* finne en måte vi ikke får med prisnivå? */}
       <div className="tags">
-      <h2>Mine foretrukne tags</h2>
-        <FilteringBar applyFilters={applyFilters} />
+        <h2>Mine foretrukne tags</h2>
+        <div className="filter">
+          <FilteringBar applyFilters={applyFilters} showSlider={false} />
+        </div>
       </div>
       <div className="visited">
         <h2>Besøkte destinasjoner</h2>
-        <MainGallery
-            destinations={destinations}
-            // handleTileClicked={saveFiltersToProfile}
-            handleTileClicked={handleDestinationTileClicked}
-            neverShowArrows={false}
-          />
+        <div className="MainGalleryProfile">
+          <MainGallery
+              destinations={destinations}
+              // handleTileClicked={saveFiltersToProfile} til når vi vil lagre dette til bruker
+              handleTileClicked={handleDestinationTileClicked}
+              neverShowArrows={false}
+            />
+            </div>
       </div>
       <div className="favourite">
         <h2>Mine favorittdestinasjoner</h2>
-        <MainGallery
-            destinations={destinations}
-            // handleTileClicked={saveFiltersToProfile}
-            handleTileClicked={handleDestinationTileClicked}
-            neverShowArrows={false}
-          />
+        <div className="MainGalleryProfile">
+          <MainGallery
+              destinations={destinations}
+              // handleTileClicked={saveFiltersToProfile}
+              handleTileClicked={handleDestinationTileClicked}
+              neverShowArrows={false}
+            />
+        </div>
       </div>
       <div>
         <h2>Mine kommentarer</h2>

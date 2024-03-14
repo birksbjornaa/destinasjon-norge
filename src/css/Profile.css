@@ -19,6 +19,27 @@
   flex-wrap: wrap;
 }
 
+.filter {
+  margin-left: 400px;
+  margin-right: 150px;
+}
+
+
+.MainGalleryProfile img {
+  flex-wrap: wrap;
+  width: 200px;
+  margin: 60px auto 0; /* Legg til en toppmargin på 60px for å unngå overlapping */
+  margin-left: 1px;
+  margin-right: 1px;
+  display: flex;
+  justify-content: display-flex; /* Plasserer elementene jevnt med litt avstand mellom */
+  height: 150px;
+  margin-bottom: 60px;
+  border-radius: 5px;
+  
+}
+
+
 .profile-page p {
   font-family: Arial, sans-serif;
   color: rgb(146, 148, 142);
@@ -55,3 +76,4 @@
   justify-content: center;
   height: 100vh;
 }
+

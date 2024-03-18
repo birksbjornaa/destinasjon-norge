@@ -1,26 +1,38 @@
-# PU (TDT4140) - Group 2
+# Destinasjon Norge
 
-![](./.pictures/destinasjon-norge.gif)
+Many individuals in Norway want to travel domestically, but feel overwhelmed due to the oveload of information online. The goal of the project is therefore to create a website that categorizes different destinations in Norway based on its activities and attractions. Users will be able to easily filter destinations based on their interests and preferences, making it easier to choose. There will also be support for creating your own profile, making it possible to review, wishlist and mark already visited destinations. All features and user stories are based on communication with the product owner.
 
-This repository hosts a group project from **NTNU**, collaboratively developed by 7 students across 3 different fields of study.
+![](./.pictures/destinasjon-norge.gif) 
 
 ## Table of content 📚
 
-- [Installation ⚡](#installation-⚡)
+- [Key features ⚡](#key-features-⚡)
 - [Get Started 🔄](#get-started-🔄)
-- [Project Members 🧔](#project-members-🧔)
 - [Tests 🧪](#tests-🧪)
-- [Overview 🔎](#overview-🔎)
-- [Diffent Types of Access ⌨️](#diffent-yypes-of-access-⌨️)
 - [Technology 👩‍💻](#technology-👩‍💻)
 - [Gitlab 👩‍💻](#gitlab-👩‍💻)
+- [Project Members 🧔](#project-members-🧔)
 
-## Installation ⚡
+## Key features
 
-1. npm
-2. node.js
+- Destinations can be "liked", which influences recommendations on the home-page. 
+
+- Destinations can be "marked", which shows up on the profile-page
+
+- Destinations can be filtered by price-range and predefined tags
+
+- Access to users not logged in. Destinations can in this case not be liked or marked.
+
+- Destination can be added, edited and deleted by admin . This includes uploading images, descriptions, and essential details about each location.
 
 ## Get Started 🔄
+
+### Prerequisites
+
+- npm
+- node.js
+
+### Installation
 
 1. Install **npm** and **node.js**: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 2. Clone repository: https://gitlab.stud.idi.ntnu.no/tdt4140-2024/produktomraade-1/gruppe-2/tdt4140_gruppe2
@@ -28,37 +40,9 @@ This repository hosts a group project from **NTNU**, collaboratively developed b
 4. To install node-modules run: `npm ci`
 5. To start frontend: `npm run dev`
 
-## Project Members 🧔
-
-- Anine Løkken -
-- Oskar Emil Wavold - oskarew@stud.ntnu.no
-- Birk Strand Bjørnaa -
-- Brinje Marie Haugli -
-- Elise Flovikholm -
-- Luka Krstic -
-- Sindre Bjerklund Lindberg
-
 ## Tests 🧪
 
 To run test [go here](./src/test/readme.md#Tests).
-
-## Overview 🔎
-
-This project is a web platform specifically designed for young Norwegians searching for new destinations within Norway. The main goal is to offer fresh ideas and simplify the process of discovering new places to visit, ensuring the platform is user-friendly and accessible to our target audience.
-
-## Differnt Types of Access ⌨️
-
-### User
-
-Users have the ability to 'like' destinations, which influences the personalized recommendations they receive. This feature make the platfor more relevant for the users persionality.
-
-### Admin
-
-Administrators has acces to more pages then normal user. They have the authority to add new destinations, edit destination and delete destinations. This capability includes uploading images, descriptions, and essential details about each location.
-
-### Other
-
-Individuals who are not logged in still have access to the page. They can browse through destinations but cannot like them or access administrator pages.
 
 ## Technology 👩‍💻
 
@@ -75,3 +59,13 @@ Individuals who are not logged in still have access to the page. They can browse
 - **Wont Have** is
 
 ### Commits
+
+## Project Members (Group 2) 🧔
+
+- Anine Løkken - aninelok@stud.ntnu.no
+- Oskar Emil Wavold - oskarew@stud.ntnu.no
+- Birk Strand Bjørnaa - birksb@stud.ntnu.no
+- Brinje Marie Haugli - brinjemh@stud.ntnu.no
+- Elise Flovikholm - eliseflo@stud.ntnu.no
+- Luka Krstic - lukakr@stud.ntnu.no
+- Sindre Bjerklund Lindberg - sindrbli@stud.ntnu.no

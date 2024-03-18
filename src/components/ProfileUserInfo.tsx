@@ -5,13 +5,16 @@ import MainGallery from "../components/MainGallery";
 import { getAllDestinations } from "../controllers/fierbaseController";
 import "../css/Main.css";
 import "../css/Profile.css";
-
 import FilteringBar from "./FilteringBar";
 import { DestinationProps } from "./GalleryDestination";
 import { AuthContext } from "../context/AuthContext";
+import { updateProfileTags } from "../controllers/userController";
 
 const UserProfile: React.FC = () => {
   const [destinations, setDestinations] = useState<DestinationProps[]>([]);
+  const [statusTags, setStatusTags] = useState<string>("");
+  const context = useContext(AuthContext);
+  const currentUser = context?.user;
 
   useEffect(() => {
     fetchAndSetData();
@@ -22,27 +25,33 @@ const UserProfile: React.FC = () => {
     setDestinations(destinations);
   };
 
-  const applyFilters = async (tags: string[], price: number) => {
-    const filteredDestinations = (await getAllDestinations()).filter(
-      (destination) => {
-        console.log(destination.tags);
-        return (
-          destination.price <= price &&
-          tags.filter((tag) => !destination.tags.includes(tag)).length == 0
-        );
-      }
-    );
-    setDestinations(filteredDestinations);
+  const applyFilters = async (tags: string[]) => {
+    if (!currentUser) {
+      return;
+    }
+    const isUpdated = await updateProfileTags(currentUser, tags);
+    if (isUpdated) {
+      setStatusTags("Oppdatering av tags gikk fint!");
+      await context.downloadAndSetUser(currentUser.email);
+    } else {
+      setStatusTags("Noe gikk galt!");
+    }
+    excecuteShake();
   };
 
-  // må lage en const for å si hva som skjer når du trykker på knappen ved filterne
-  // const saveFiltersToProfile
   const navigate = useNavigate();
 
   const handleDestinationTileClicked = (destinationId: string) => {
     navigate("/destination/" + destinationId);
   };
-  const currentUser = useContext(AuthContext)?.user;
+  const [shake, setShake] = useState(false);
+
+  const excecuteShake = () => {
+    setShake(true);
+    setTimeout(() => {
+      setShake(false);
+    }, 500); // (0.5s)
+  };
 
   return (
     <div className="profile-page">
@@ -58,27 +67,32 @@ const UserProfile: React.FC = () => {
             <br></br>destinasjoner, favorittdestinasjoner og dine egne
             vurderinger
           </p>
+          <p>
+            Bla ned for å se en oversikt over dine foretrukne tags, dine besøkte{" "}
+            <br></br>destinasjoner, favorittdestinasjoner og dine egne
+            vurderinger
+          </p>
         </div>
       </div>
-      {/* finne en måte vi ikke får med prisnivå? */}
       <div className="tags">
         <h2>Mine foretrukne tags</h2>
         <div className="filter">
           <FilteringBar applyFilters={applyFilters} showSlider={false} />
+          <h3 className={shake ? "shake-animation" : ""}>{statusTags}</h3>
         </div>
       </div>
-      <div className="visited">
+      <div>
         <h2>Besøkte destinasjoner</h2>
         <div className="MainGalleryProfile">
           <MainGallery
             destinations={destinations}
-            // handleTileClicked={saveFiltersToProfile} til når vi vil lagre dette til bruker
+            // handleTileClicked={saveFiltersToProfile}
             handleTileClicked={handleDestinationTileClicked}
             neverShowArrows={false}
           />
         </div>
       </div>
-      <div className="favourite">
+      <div>
         <h2>Mine favorittdestinasjoner</h2>
         <div className="MainGalleryProfile">
           <MainGallery

@@ -16,9 +16,11 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const provider = new GoogleAuthProvider();
 
   const [user, setUser] = useState<User>({
+    id: "",
     loggedIn: false,
     email: "",
     role: "not logged in",
+    tags: [],
   });
 
   const handleLogin = async () => {
@@ -29,13 +31,8 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       if (userEmail && !(await hasUser(userEmail))) {
         await createNewUser(userEmail);
       }
-      const databaseUser = await getUser(user.email);
 
-      setUser({
-        loggedIn: true,
-        email: userEmail || "",
-        role: databaseUser.role,
-      });
+      await downloadAndSetUser(user.email);
     } catch (error) {
       console.error("Login Error:", error);
     }
@@ -44,22 +41,28 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (authUser) => {
       if (authUser?.email) {
-        const userEmail = authUser.email;
-        const userData = await getUser(userEmail);
-        setUser({
-          loggedIn: true,
-          email: userEmail,
-          role: userData.role,
-        });
+        await downloadAndSetUser(authUser.email);
       }
     });
 
     return () => unsubscribe();
   }, [auth]);
 
+  async function downloadAndSetUser(email: string) {
+    const userData = await getUser(email);
+
+    if (userData) {
+      setUser({
+        ...userData,
+        loggedIn: true,
+      });
+    }
+  }
+
   const value = {
     user,
     handleLogin,
+    downloadAndSetUser,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

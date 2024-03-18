@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../css/DestinationChooser.css";
 
 export function FilteringBar({
@@ -29,11 +29,6 @@ export function FilteringBar({
     applyFilters(tags, price);
   };
 
-  useEffect(() => {
-    console.log(tags);
-    console.log(price);
-  }, [tags, price]);
-
   return (
     <div className="FilterCheckboxes">
       <div className="CheckboxGroup">
@@ -55,7 +50,7 @@ export function FilteringBar({
       )}
       <div className="ButtonContainer">
         {!showSlider && (
-          <Button title="Sett filter" onClick={handleApplyFilters} />
+          <Button title="Sett tags" onClick={handleApplyFilters} />
         )}
         {showSlider && (
           <Button title="Søk etter reise" onClick={handleApplyFilters} />

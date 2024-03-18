@@ -89,14 +89,17 @@ export async function createNewUser(email: string) {
     return false;
   }
 }
-// TODO: oppdater AuthProivider sin versjon når oppdaterer database!
+
 export async function updateProfileTags(user: UserData, newTags: string[]) {
   try {
-    const updateData = {
-      ...user,
+    const updatedUser = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      tags: newTags,
     };
-    updateData.tags = newTags;
-    await updateDoc(doc(db, "Users", user.id), updateData);
+
+    await updateDoc(doc(db, "Users", user.id), updatedUser);
 
     return true; // Updated OK
   } catch (e) {
@@ -104,6 +107,3 @@ export async function updateProfileTags(user: UserData, newTags: string[]) {
     return false; // Somthing wrong
   }
 }
-
-// Må lage en funksjon som lagrer tags til profilen
-// export default function saveTagsToProfile(token: string,)

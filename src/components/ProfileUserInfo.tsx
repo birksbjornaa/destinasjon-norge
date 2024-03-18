@@ -55,25 +55,24 @@ const UserProfile: React.FC = () => {
           <p>Bla ned for å se en oversikt over dine foretrukne tags, dine besøkte <br></br>destinasjoner, favorittdestinasjoner og dine egne vurderinger</p>
         </div>
       </div>
-      {/* finne en måte vi ikke får med prisnivå? */}
       <div className="tags">
         <h2>Mine foretrukne tags</h2>
         <div className="filter">
           <FilteringBar applyFilters={applyFilters} showSlider={false} />
         </div>
       </div>
-      <div className="visited">
+      <div>
         <h2>Besøkte destinasjoner</h2>
         <div className="MainGalleryProfile">
           <MainGallery
               destinations={destinations}
-              // handleTileClicked={saveFiltersToProfile} til når vi vil lagre dette til bruker
+              // handleTileClicked={saveFiltersToProfile}
               handleTileClicked={handleDestinationTileClicked}
               neverShowArrows={false}
             />
-            </div>
+        </div>
       </div>
-      <div className="favourite">
+      <div>
         <h2>Mine favorittdestinasjoner</h2>
         <div className="MainGalleryProfile">
           <MainGallery

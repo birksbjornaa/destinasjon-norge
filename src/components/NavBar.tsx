@@ -43,6 +43,9 @@ const NavBar: React.FC<navBarProps> = ({ handleLogoHomeClicked }) => {
                   <Link to="/profile">
                     <button>Profile</button>
                   </Link>
+                  <Link to="/createdestination">
+                    <button>Ny dest</button>
+                  </Link>
                 </li>
               ) : (
                 <li>

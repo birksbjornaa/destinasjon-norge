@@ -11,8 +11,6 @@ import { DestinationProps } from "./GalleryDestination";
 import { db } from "../config/firebaseConfig";
 import { collection, doc } from "@firebase/firestore";
 import { updateDoc } from "firebase/firestore";
-import { DocumentData, DocumentReference } from "firebase/firestore";
-import { DatabaseReference } from "firebase/database";
 
 const UserProfile: React.FC = () => {
   const [destinations, setDestinations] = useState<DestinationProps[]>([]);
@@ -30,6 +28,7 @@ const UserProfile: React.FC = () => {
   const applyFilters = (tags: string[], price: number) => {
     const colRef = collection(db, "Users");
     const docRef = doc(colRef, currentToken);
+    setTags(tags);
     updateDoc(docRef, {
       tags: tags,
     });

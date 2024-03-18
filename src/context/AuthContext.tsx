@@ -9,9 +9,9 @@ export interface User {
   tags: string[];
 }
 
-export interface UserState {
+export interface AuthContext {
   user: User;
   handleLogin: () => Promise<void>;
   downloadAndSetUser: (email: string) => Promise<void>;
 }
-export const AuthContext = React.createContext<UserState | null>(null);
+export const AuthContext = React.createContext<AuthContext | null>(null);

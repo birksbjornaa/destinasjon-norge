@@ -7,13 +7,48 @@ import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { useNavigate } from "react-router";
 import NavBar from "../components/NavBar";
+import { db } from "../config/firebaseConfig";
+import { collection, doc } from "@firebase/firestore";
+import { currentToken } from "../pages/Login";
+import { getDoc } from "firebase/firestore";
 
 export default function Home() {
   const [destinations, setDestinations] = useState<DestinationProps[]>([]);
+  const [recommended, setRecommended] = useState<DestinationProps[]>([]);
 
   useEffect(() => {
-    fetchAndSetData();
+    const fetchData = async () => {
+      await fetchAndSetData();
+      const favoriteTags = await fetchFavoriteTags();
+      const newRecommended = await getRecommendedDestinations(favoriteTags);
+      setRecommended(newRecommended);
+    };
+
+    fetchData();
   }, []);
+
+  const fetchFavoriteTags = async () => {
+    const colRef = collection(db, "Users");
+    const docRef = doc(colRef, currentToken);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      return docSnap.data().tags;
+    } else {
+      return [];
+    }
+  };
+
+  const getRecommendedDestinations = async (tags: string[]) => {
+    const filteredDestinations = (await getAllDestinations()).filter(
+      (destination) => {
+        return (
+          tags.filter((tag) => !destination.tags.includes(tag)).length == 0
+        );
+      }
+    );
+    return filteredDestinations;
+  };
 
   const fetchAndSetData = async () => {
     const destinations = await getAllDestinations();
@@ -51,7 +86,7 @@ export default function Home() {
       <SubHeader string="Vi anbefaler" />
       <div className="mainDestination">
         <MainGallery
-          destinations={destinations}
+          destinations={recommended}
           handleTileClicked={handleDestinationTileClicked}
           neverShowArrows={false}
         />{" "}

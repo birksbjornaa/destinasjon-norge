@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   createMissingData,
   getDestination,
@@ -11,25 +11,16 @@ import Visited from "../assets/Visited.png";
 import Unvisited from "../assets/Unvisited.png";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import { user } from "./Login";
 import DeleteButton from "../components/DeleteButton"; // Import the DeleteButton component
+import { AuthContext } from "../context/AuthContext";
 
 export default function DestinationDetailed() {
   const [destination, setDestination] = useState(createMissingData());
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isVisited, setIsVisited] = useState<boolean>(false);
-  const [currentUser, setUser] = useState({
-    loggedIn: false,
-    token: "",
-    email: "",
-    role: "user",
-  });
 
   useEffect(() => {
     fetchAndSetData();
-    if (user.loggedIn) {
-      setUser(user);
-    }
   }, []);
 
   const { id } = useParams<{ id: string }>();
@@ -67,7 +58,7 @@ export default function DestinationDetailed() {
   const handleDestinationTileClicked = (destinationId: string) => {
     navigate("/edit/" + destinationId);
   };
-
+  const currentUser = useContext(AuthContext)?.user;
   return (
     <div className="destinationDetailed">
       <NavBar handleLogoHomeClicked={goToHomePage} />
@@ -105,20 +96,22 @@ export default function DestinationDetailed() {
         </div>
         <br />
         <div className="edit-delete-container">
-          {currentUser.role === "admin" && (
-            <>
-              <button
-                className="edit-button"
-                id="Edit"
-                onClick={() => handleDestinationTileClicked(destination.id)}
-              >
-                Rediger
-              </button>
-              <button className="delete-button" id="Delete">
-                Slett
-              </button>
-            </>
-          )}
+          {currentUser &&
+            currentUser.loggedIn &&
+            currentUser.role === "admin" && (
+              <>
+                <button
+                  className="edit-button"
+                  id="Edit"
+                  onClick={() => handleDestinationTileClicked(destination.id)}
+                >
+                  Rediger
+                </button>
+                <button className="delete-button" id="Delete">
+                  Slett
+                </button>
+              </>
+            )}
         </div>
         <div className="tags-ratings-container">
           <div className="tags">

@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import profilePicture from "../assets/profilePicture.png";
 import MainGallery from "../components/MainGallery";
 import { getAllDestinations } from "../controllers/fierbaseController";
 import "../css/Main.css";
 import "../css/Profile.css";
-import { user } from "../pages/Login";
+
 import FilteringBar from "./FilteringBar";
 import { DestinationProps } from "./GalleryDestination";
+import { AuthContext } from "../context/AuthContext";
 
 const UserProfile: React.FC = () => {
   const [destinations, setDestinations] = useState<DestinationProps[]>([]);
@@ -41,6 +42,7 @@ const UserProfile: React.FC = () => {
   const handleDestinationTileClicked = (destinationId: string) => {
     navigate("/destination/" + destinationId);
   };
+  const currentUser = useContext(AuthContext)?.user;
 
   return (
     <div className="profile-page">
@@ -49,7 +51,7 @@ const UserProfile: React.FC = () => {
           <img src={profilePicture} alt="Profile" />
         </div>
         <div className="email">
-          <p>{user.email}</p>
+          <p>{currentUser ? currentUser.email : ""}</p>
           <br></br>
           <p>
             Bla ned for å se en oversikt over dine foretrukne tags, dine besøkte{" "}

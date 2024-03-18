@@ -3,7 +3,7 @@ import profile from "../assets/profile.jpg";
 import React, { useState } from "react";
 import { Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { LoggedIn } from "../pages/Login.tsx";
+import { user } from "../pages/Login.tsx";
 
 import imgLogo from "../assets/LogoDestinasjonNorge.png";
 
@@ -35,10 +35,8 @@ const NavBar: React.FC<navBarProps> = ({ handleLogoHomeClicked }) => {
           </button>
           {showMenu && (
             <ul className="menu-list">
-              <li className="menu">
-
-              </li>
-              {LoggedIn ? (
+              <li className="menu"></li>
+              {user.loggedIn ? (
                 <li>
                   <Link to="/profile">
                     <button>Profile</button>

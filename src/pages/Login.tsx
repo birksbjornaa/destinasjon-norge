@@ -1,56 +1,58 @@
-import { GoogleAuthProvider, getAuth, signInWithPopup, onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import { useEffect, useState } from "react";
-import { getUser } from "../controllers/userController"
+import { useEffect } from "react";
+import { createNewUser, getUser, hasUser } from "../controllers/userController";
 
-let LoggedIn: boolean = false;
-let currentToken: string = "";
-let currentUserEmail: string;
-
-
+let user = { loggedIn: false, token: "", email: "", role: "user" };
 export function Login() {
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
-  
+
   const handleLogin = () => {
     signInWithPopup(auth, provider)
-    .then(async (result) => {
-      LoggedIn = true;
-
-      const token = await result.user.getIdToken();
-      if (result.user.email) {
-        const email: string = result.user.email;
-        currentToken = token;
-        currentUserEmail = email;
-        getUser(token, email);
-      } else {
-        console.log("No user email");
-      }
-
-      navigate('/');
-    }).catch((error) => {
-      console.log('handlelogin', error);
-    });
+      .then(async (result) => {
+        user.token = await result.user.getIdToken();
+        user.email = result.user.email as string;
+        if (!hasUser(user.email)) {
+          createNewUser(user.token, user.email);
+        }
+        const databaseUser = await getUser(user.email);
+        if (databaseUser) {
+          user.role = databaseUser.role;
+        }
+        user.loggedIn = true;
+        navigate("/");
+      })
+      .catch((error) => {
+        // Handle errors here
+      });
   };
 
   useEffect(() => {
-    const navigateHome = onAuthStateChanged(auth, (user) => {
-    if (user) {
-      LoggedIn = true;
-      navigate('/');
-    } else {
-      handleLogin();
-    }
-  });
+    const navigateHome = onAuthStateChanged(auth, (inputUser) => {
+      if (inputUser) {
+        user.loggedIn = true;
+        navigate("/");
+      } else {
+        handleLogin();
+      }
+    });
 
-  return () => navigateHome();
+    return () => navigateHome();
   }, [auth, navigate]);
 
-return (<div><NavBar handleLogoHomeClicked={() => navigate("/")}/></div>);
+  return (
+    <div>
+      <NavBar handleLogoHomeClicked={() => navigate("/")} />
+    </div>
+  );
 }
 
-
-export { LoggedIn, currentUserEmail, currentToken };
-  
+export { user };

@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { createMissingData, getDestination, deleteDestination } from "../controllers/fierbaseController";
+import {
+  createMissingData,
+  getDestination,
+  deleteDestination,
+} from "../controllers/fierbaseController";
 import "../css/DestinationDetailed.css";
 import Like from "../assets/Like.png";
 import Unlike from "../assets/Unlike.png";
@@ -7,29 +11,26 @@ import Visited from "../assets/Visited.png";
 import Unvisited from "../assets/Unvisited.png";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import { currentToken } from "./Login";
-import { checkIfUserIsAdmin } from "../controllers/userController";
+import { user } from "./Login";
 import DeleteButton from "../components/DeleteButton"; // Import the DeleteButton component
 
 export default function DestinationDetailed() {
   const [destination, setDestination] = useState(createMissingData());
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isVisited, setIsVisited] = useState<boolean>(false);
+  const [currentUser, setUser] = useState({
+    loggedIn: false,
+    token: "",
+    email: "",
+    role: "user",
+  });
 
   useEffect(() => {
     fetchAndSetData();
+    if (user.loggedIn) {
+      setUser(user);
+    }
   }, []);
-
-  const [isAdmin, setIsAdmin] = useState(false);
-
-useEffect(() => {
-  const checkAdminStatus = async () => {
-    const adminStatus = await checkIfUserIsAdmin(currentToken);
-    setIsAdmin(adminStatus);
-  };
-
-  checkAdminStatus();
-}, [currentToken]);
 
   const { id } = useParams<{ id: string }>();
   let currentDestinationId: string = id as string;
@@ -72,7 +73,7 @@ useEffect(() => {
       <NavBar handleLogoHomeClicked={goToHomePage} />
       <div className="container">
         <h1 className="header">{destination.name}</h1>
-  
+
         <button
           className="favorite-button"
           id="toggleButton"
@@ -91,26 +92,32 @@ useEffect(() => {
           id="toggleButton2"
           onClick={toggleLike2}
         >
-
           <img
             className="visited"
             id="image2"
             src={isVisited ? Visited : Unvisited}
             alt={isVisited ? "Visited" : "Unvisited"}
           />
-
         </button>
-  
+
         <div className="image-container">
           <img src={destination.imageSrc} alt="Image" className="image" />
         </div>
         <br />
         <div className="edit-delete-container">
-          
-        { isAdmin && (<>
-        <button className="edit-button" id="Edit" onClick={() => handleDestinationTileClicked(destination.id)}>Rediger</button>
-          <button className="delete-button" id="Delete">Slett</button>
-          </>
+          {currentUser.role === "admin" && (
+            <>
+              <button
+                className="edit-button"
+                id="Edit"
+                onClick={() => handleDestinationTileClicked(destination.id)}
+              >
+                Rediger
+              </button>
+              <button className="delete-button" id="Delete">
+                Slett
+              </button>
+            </>
           )}
         </div>
         <div className="tags-ratings-container">
@@ -142,5 +149,4 @@ useEffect(() => {
       <h2 className="sub-header">Kommentarer</h2>
     </div>
   );
-  
 }

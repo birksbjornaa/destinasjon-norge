@@ -1,5 +1,5 @@
 import { collection } from "@firebase/firestore";
-import { addDoc, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { addDoc, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 
 const usersCollection = collection(db, "Users");
@@ -45,10 +45,6 @@ export async function getAllTokens(): Promise<string[]> {
 
 export async function hasUser(email: string) {
   const users = await getAllUsers();
-  console.log(users);
-  // sleep 10 sec
-  await new Promise((resolve) => setTimeout(resolve, 10000));
-
   for (let user of users) {
     if (user.email === email) {
       return true;
@@ -78,9 +74,9 @@ export async function getUser(inputEmail: string) {
 export async function createNewUser(token: string, email: string) {
   try {
     const newUser = {
-      token: token,
       email: email,
       role: "user",
+      token: token,
     };
     await addDoc(usersCollection, newUser);
     return true;

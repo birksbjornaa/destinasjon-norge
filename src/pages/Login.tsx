@@ -20,8 +20,11 @@ export function Login() {
       .then(async (result) => {
         user.token = await result.user.getIdToken();
         user.email = result.user.email as string;
-        if (!hasUser(user.email)) {
-          createNewUser(user.token, user.email);
+        if (user.email === null) {
+          throw new Error("Email is null");
+        }
+        if (!(await hasUser(user.email))) {
+          await createNewUser(user.token, user.email);
         }
         const databaseUser = await getUser(user.email);
         if (databaseUser) {
@@ -36,6 +39,8 @@ export function Login() {
   };
 
   useEffect(() => {
+    // time break 10 sek
+
     const navigateHome = onAuthStateChanged(auth, (inputUser) => {
       if (inputUser) {
         user.loggedIn = true;

@@ -20,6 +20,7 @@
 
 .filter {
   margin-left: 345px;
+  margin-left: 345px;
   margin-right: 150px;
 }
 
@@ -27,6 +28,9 @@
 .MainGalleryProfile img {
   flex-wrap: wrap;
   width: 200px;
+  margin: 60px auto 0;
+  margin-left: 10px;
+  margin-right: 10px;
   margin: 60px auto 0;
   margin-left: 10px;
   margin-right: 10px;

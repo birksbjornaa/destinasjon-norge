@@ -67,11 +67,6 @@ const UserProfile: React.FC = () => {
             <br></br>destinasjoner, favorittdestinasjoner og dine egne
             vurderinger
           </p>
-          <p>
-            Bla ned for å se en oversikt over dine foretrukne tags, dine besøkte{" "}
-            <br></br>destinasjoner, favorittdestinasjoner og dine egne
-            vurderinger
-          </p>
         </div>
       </div>
       <div className="tags">
@@ -93,21 +88,23 @@ const UserProfile: React.FC = () => {
         </div>
       </div>
       <div>
-        <h2>Mine favorittdestinasjoner</h2>
-        <div className="MainGalleryProfile">
-          <MainGallery
-            destinations={destinations}
-            // handleTileClicked={saveFiltersToProfile}
-            handleTileClicked={handleDestinationTileClicked}
-            neverShowArrows={false}
-          />
+        <div>
+          <h2>Mine favorittdestinasjoner</h2>
+          <div className="MainGalleryProfile">
+            <MainGallery
+              destinations={destinations}
+              // handleTileClicked={saveFiltersToProfile}
+              handleTileClicked={handleDestinationTileClicked}
+              neverShowArrows={false}
+            />
+          </div>
         </div>
-      </div>
-      <div>
-        <h2>Mine kommentarer</h2>
-        <p>Her vil det stå kommentarer når vi har lagt til rette for det</p>
-        <br></br>
-        <br></br>
+        <div>
+          <h2>Mine kommentarer</h2>
+          <p>Her vil det stå kommentarer når vi har lagt til rette for det</p>
+          <br></br>
+          <br></br>
+        </div>
       </div>
     </div>
   );

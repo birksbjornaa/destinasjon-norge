@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../css/DestinationChooser.css";
 
 export function FilteringBar({

@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import profilePicture from "../assets/profilePicture.png";
 import MainGallery from "../components/MainGallery";
 import { getAllDestinations } from "../controllers/fierbaseController";
 import "../css/Main.css";
 import "../css/Profile.css";
-import { currentToken, currentUserEmail } from "../pages/Login";
 import FilteringBar from "./FilteringBar";
 import { DestinationProps } from "./GalleryDestination";
-import { db } from "../config/firebaseConfig";
-import { collection, doc } from "@firebase/firestore";
-import { updateDoc } from "firebase/firestore";
+import { AuthContext } from "../context/AuthContext";
+import { updateProfileTags } from "../controllers/userController";
 
 const UserProfile: React.FC = () => {
   const [destinations, setDestinations] = useState<DestinationProps[]>([]);
-  const [tags, setTags] = useState<string[]>([]);
+  const [statusTags, setStatusTags] = useState<string>("");
+  const context = useContext(AuthContext);
+  const currentUser = context?.user;
 
   useEffect(() => {
     fetchAndSetData();
@@ -25,21 +25,32 @@ const UserProfile: React.FC = () => {
     setDestinations(destinations);
   };
 
-  const applyFilters = (tags: string[], price: number) => {
-    const colRef = collection(db, "Users");
-    const docRef = doc(colRef, currentToken);
-    setTags(tags);
-    updateDoc(docRef, {
-      tags: tags,
-    });
+  const applyFilters = async (tags: string[]) => {
+    if (!currentUser) {
+      return;
+    }
+    const isUpdated = await updateProfileTags(currentUser, tags);
+    if (isUpdated) {
+      setStatusTags("Oppdatering av tags gikk fint!");
+      await context.downloadAndSetUser(currentUser.email);
+    } else {
+      setStatusTags("Noe gikk galt!");
+    }
+    excecuteShake();
   };
 
-  // må lage en const for å si hva som skjer når du trykker på knappen ved filterne
-  // const saveFiltersToProfile
   const navigate = useNavigate();
 
   const handleDestinationTileClicked = (destinationId: string) => {
     navigate("/destination/" + destinationId);
+  };
+  const [shake, setShake] = useState(false);
+
+  const excecuteShake = () => {
+    setShake(true);
+    setTimeout(() => {
+      setShake(false);
+    }, 500); // (0.5s)
   };
 
   return (
@@ -49,7 +60,7 @@ const UserProfile: React.FC = () => {
           <img src={profilePicture} alt="Profile" />
         </div>
         <div className="email">
-          <p>{currentUserEmail}</p>
+          <p>{currentUser ? currentUser.email : ""}</p>
           <br></br>
           <p>
             Bla ned for å se en oversikt over dine foretrukne tags, dine besøkte{" "}
@@ -62,21 +73,11 @@ const UserProfile: React.FC = () => {
         <h2>Mine foretrukne tags</h2>
         <div className="filter">
           <FilteringBar applyFilters={applyFilters} showSlider={false} />
+          <h3 className={shake ? "shake-animation" : ""}>{statusTags}</h3>
         </div>
       </div>
       <div>
         <h2>Besøkte destinasjoner</h2>
-        <div className="MainGalleryProfile">
-          <MainGallery
-              destinations={destinations}
-              // handleTileClicked={saveFiltersToProfile}
-              handleTileClicked={handleDestinationTileClicked}
-              neverShowArrows={false}
-            />
-        </div>
-      </div>
-      <div>
-        <h2>Mine favorittdestinasjoner</h2>
         <div className="MainGalleryProfile">
           <MainGallery
             destinations={destinations}
@@ -87,10 +88,23 @@ const UserProfile: React.FC = () => {
         </div>
       </div>
       <div>
-        <h2>Mine kommentarer</h2>
-        <p>Her vil det stå kommentarer når vi har lagt til rette for det</p>
-        <br></br>
-        <br></br>
+        <div>
+          <h2>Mine favorittdestinasjoner</h2>
+          <div className="MainGalleryProfile">
+            <MainGallery
+              destinations={destinations}
+              // handleTileClicked={saveFiltersToProfile}
+              handleTileClicked={handleDestinationTileClicked}
+              neverShowArrows={false}
+            />
+          </div>
+        </div>
+        <div>
+          <h2>Mine kommentarer</h2>
+          <p>Her vil det stå kommentarer når vi har lagt til rette for det</p>
+          <br></br>
+          <br></br>
+        </div>
       </div>
     </div>
   );

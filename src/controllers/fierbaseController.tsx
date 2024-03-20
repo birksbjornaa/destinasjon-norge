@@ -1,6 +1,13 @@
 import { collection } from "@firebase/firestore";
 import { db } from "../config/firebaseConfig";
-import { doc, getDoc, getDocs, addDoc, updateDoc, deleteDoc} from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 const destinationCollection = collection(db, "Destination");
 
@@ -119,6 +126,6 @@ export async function deleteDestination(id: string): Promise<void> {
     await deleteDoc(doc(db, "Destination", id));
   } catch (error) {
     console.error("Error deleting document (destination): ", error);
-    throw error; 
+    throw error;
   }
 }

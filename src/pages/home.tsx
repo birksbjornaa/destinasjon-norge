@@ -69,14 +69,18 @@ export default function Home() {
           neverShowArrows={false}
         />{" "}
       </div>
-      <SubHeader string="Vi anbefaler" />
-      <div className="mainDestination">
-        <MainGallery
-          destinations={recommended}
-          handleTileClicked={handleDestinationTileClicked}
-          neverShowArrows={false}
-        />{" "}
-      </div>
+      {currentUser?.loggedIn && (
+        <>
+          <SubHeader string="Vi anbefaler" />
+          <div className="mainDestination">
+            <MainGallery
+              destinations={recommended}
+              handleTileClicked={handleDestinationTileClicked}
+              neverShowArrows={false}
+            />{" "}
+          </div>
+        </>
+      )}
     </div>
   );
 }

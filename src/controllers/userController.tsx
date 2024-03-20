@@ -93,9 +93,6 @@ export async function createNewUser(email: string) {
 export async function updateProfileTags(user: UserData, newTags: string[]) {
   try {
     const updatedUser = {
-      id: user.id,
-      email: user.email,
-      role: user.role,
       tags: newTags,
     };
 

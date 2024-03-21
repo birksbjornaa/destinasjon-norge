@@ -54,7 +54,8 @@ body {
   margin: 0 auto;
   flex-grow: 1;
   text-align: center;
-  font-family: cursive;
+  font-family: monospace, cursive;
+  color: rgb(94, 107, 75);
   font-size: 60px;
 }
 
@@ -115,7 +116,8 @@ ul li button {
   background-color: transparent;
   border: none;
   font-size: 30px;
-  color: green;
+  /* color: green; */
+  color: rgb(124, 141, 99);
   cursor: pointer;
   margin: 0 3px; /* Mindre margin mellom knappene og bildene */
   align-self: center; /* Plasserer knappene midt i høyden av bildene */
@@ -180,4 +182,21 @@ ul li button {
   font-size: 18px;
   border: 1px solid green;
   border-radius: 5px;
+}
+
+.modern-button {
+  background-color: rgb(203, 216, 182);;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.modern-button:hover {
+  background-color: #45a049;
 }

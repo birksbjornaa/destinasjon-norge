@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "../css/DestinationChooser.css";
-import { getRemoteConfig } from "firebase/remote-config";
 
 export function FilteringBar({
   applyFilters,
+  showSlider,
 }: {
   applyFilters: (tags: string[], price: number) => void;
+  showSlider: boolean;
 }) {
   const [tags, setTags] = useState<string[]>([]);
   const [price, setPrice] = useState(5);
@@ -28,11 +29,6 @@ export function FilteringBar({
     applyFilters(tags, price);
   };
 
-  useEffect(() => {
-    console.log(tags);
-    console.log(price);
-  }, [tags, price]);
-
   return (
     <div className="FilterCheckboxes">
       <div className="CheckboxGroup">
@@ -47,11 +43,18 @@ export function FilteringBar({
         <Checkbox label="Mat" onChange={handleCheckboxChange} />
         <Checkbox label="Sport" onChange={handleCheckboxChange} />
       </div>
-      <div className='="SliderContainer'>
-        <Slider onChange={handleSliderChange} />
-      </div>
+      {showSlider && (
+        <div className='="SliderContainer'>
+          <Slider onChange={handleSliderChange} />
+        </div>
+      )}
       <div className="ButtonContainer">
-        <Button title="Søk etter reise" onClick={handleApplyFilters} />
+        {!showSlider && (
+          <Button title="Sett tags" onClick={handleApplyFilters} />
+        )}
+        {showSlider && (
+          <Button title="Søk etter reise" onClick={handleApplyFilters} />
+        )}
       </div>
     </div>
   );

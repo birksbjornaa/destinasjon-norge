@@ -14,9 +14,17 @@ body {
     text-align: center;
   }
   
-
+  #delete {
+    background-color:red;
+  }
   
   .image {
+    width: 50%;
+    height: auto;
+    margin: 0 10px;
+  }
+
+  .image2 {
     width: 50%;
     height: auto;
     margin: 0 10px;
@@ -29,6 +37,24 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .edit-delete-container {
+    margin-top: 20px;
+    margin-left:550px;
+    margin-right:550px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #Edit {
+    padding:15px;
+  }
+
+  #Delete {
+    background-color: red;
+    padding: 15px;
   }
 
   #textbeskrivelse {
@@ -62,6 +88,21 @@ body {
     width: 25px;
     height: 25px;
   }
+
+  .visited-button {
+    background: none;
+    border: 1px solid white;
+    padding: 5px 10px;
+    cursor: pointer;
+    position: absolute;
+    top: 180px;
+    right: 30px;
+    }
+  
+    .visited {
+      width: 25px;
+      height: 25px;
+    }
   .tags ul {
     list-style-type: none;
     padding: 0;

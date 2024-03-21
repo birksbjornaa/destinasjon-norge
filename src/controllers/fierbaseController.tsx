@@ -1,6 +1,13 @@
 import { collection } from "@firebase/firestore";
 import { db } from "../config/firebaseConfig";
-import { doc, getDoc, getDocs, addDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+} from "firebase/firestore";
 
 const destinationCollection = collection(db, "Destination");
 
@@ -107,5 +114,14 @@ export async function updateExsistingDestination(destination: DestinationData) {
     await updateDoc(doc(db, "Destination", destination.id), updateData);
   } catch (e) {
     console.error("Error editing document (destination): ", e);
+  }
+}
+
+export async function deleteDestination(id: string): Promise<void> {
+  try {
+    await deleteDoc(doc(db, "Destination", id));
+  } catch (error) {
+    console.error("Error deleting document (destination): ", error);
+    throw error;
   }
 }

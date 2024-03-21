@@ -1,4 +1,4 @@
-import Form from "../components/Form";
+import CreateForm from "../components/CreateForm";
 import { useNavigate } from "react-router";
 import NavBar from "../components/NavBar";
 
@@ -15,7 +15,7 @@ export default function CreateDestination() {
   return (
     <div>
       <NavBar handleLogoHomeClicked={goToHomePage} />
-      <Form goToDestination={goToNewDestination} />
+      <CreateForm goToDestination={goToNewDestination} />
     </div>
   );
 }

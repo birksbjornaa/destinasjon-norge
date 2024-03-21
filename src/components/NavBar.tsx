@@ -1,11 +1,11 @@
 import "../css/Main.css";
 import profile from "../assets/profile.jpg";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Navbar, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { LoggedIn } from "../pages/Login.tsx";
 
 import imgLogo from "../assets/LogoDestinasjonNorge.png";
+import { AuthContext } from "../context/AuthContext";
 
 interface navBarProps {
   handleLogoHomeClicked: () => void;
@@ -15,6 +15,8 @@ const NavBar: React.FC<navBarProps> = ({ handleLogoHomeClicked }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => setShowMenu(!showMenu);
+  const authContext = useContext(AuthContext);
+  const currentUser = authContext?.user;
 
   return (
     <Navbar>
@@ -35,29 +37,27 @@ const NavBar: React.FC<navBarProps> = ({ handleLogoHomeClicked }) => {
           </button>
           {showMenu && (
             <ul className="menu-list">
-              <li className="menu">
-
-              </li>
-              {LoggedIn ? (
+              <li className="menu"></li>
+              {currentUser && currentUser.loggedIn ? (
                 <li>
-                  <button onClick={() => console.log("Navigating to Profile")}>
-                    Profile
-                  </button>
+                  <Link to="/profile">
+                    <button>Profile</button>
+                  </Link>
+                  <Link to="/createdestination">
+                    <button>Ny dest</button>
+                  </Link>
                 </li>
               ) : (
                 <li>
-                  <Link to="/login">
-                    <button onClick={() => console.log("Navigating to Login")}>
-                      Login
-                    </button>
-                  </Link>
+                  <button
+                    onClick={() => {
+                      authContext?.handleLogin();
+                    }}
+                  >
+                    Login
+                  </button>
                 </li>
               )}
-              <li>
-                <button onClick={() => console.log("Navigating to Settings")}>
-                  Settings
-                </button>
-              </li>
             </ul>
           )}
         </div>

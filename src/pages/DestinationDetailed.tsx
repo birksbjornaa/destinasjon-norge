@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
-import { createMissingData, getDestination, deleteDestination } from "../controllers/fierbaseController";
+import { useContext, useEffect, useState } from "react";
+import {
+  createMissingData,
+  getDestination,
+  deleteDestination,
+} from "../controllers/fierbaseController";
 import "../css/DestinationDetailed.css";
 import Like from "../assets/Like.png";
 import Unlike from "../assets/Unlike.png";
@@ -7,9 +11,8 @@ import Visited from "../assets/Visited.png";
 import Unvisited from "../assets/Unvisited.png";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import { currentToken } from "./Login";
-import { checkIfUserIsAdmin } from "../controllers/userController";
 import DeleteButton from "../components/DeleteButton"; // Import the DeleteButton component
+import { AuthContext } from "../context/AuthContext";
 
 // Til når vi skal koble sammen med en bruker, og til destination
 export let starsRated: number = 0;
@@ -24,16 +27,6 @@ export default function DestinationDetailed() {
   useEffect(() => {
     fetchAndSetData();
   }, []);
-
-
-  useEffect(() => {
-    const checkAdminStatus = async () => {
-      const adminStatus = await checkIfUserIsAdmin(currentToken);
-      setIsAdmin(adminStatus);
-    };
-
-    checkAdminStatus();
-  }, [currentToken]);
 
   const { id } = useParams<{ id: string }>();
   let currentDestinationId: string = id as string;
@@ -75,13 +68,13 @@ export default function DestinationDetailed() {
   const handleDestinationTileClicked = (destinationId: string) => {
     navigate("/edit/" + destinationId);
   };
-
+  const currentUser = useContext(AuthContext)?.user;
   return (
     <div className="destinationDetailed">
       <NavBar handleLogoHomeClicked={goToHomePage} />
       <div className="container">
         <h1 className="header">{destination.name}</h1>
-  
+
         <button
           className="favorite-button"
           id="toggleButton"
@@ -100,27 +93,35 @@ export default function DestinationDetailed() {
           id="toggleButton2"
           onClick={toggleLike2}
         >
-
           <img
             className="visited"
             id="image2"
             src={isVisited ? Visited : Unvisited}
             alt={isVisited ? "Visited" : "Unvisited"}
           />
-
         </button>
-  
+
         <div className="image-container">
           <img src={destination.imageSrc} alt="Image" className="image" />
         </div>
         <br />
         <div className="edit-delete-container">
-          
-        { isAdmin && (<>
-        <button className="edit-button" id="Edit" onClick={() => handleDestinationTileClicked(destination.id)}>Rediger</button>
-          <button className="delete-button" id="Delete">Slett</button>
-          </>
-          )}
+          {currentUser &&
+            currentUser.loggedIn &&
+            currentUser.role === "admin" && (
+              <>
+                <button
+                  className="edit-button"
+                  id="Edit"
+                  onClick={() => handleDestinationTileClicked(destination.id)}
+                >
+                  Rediger
+                </button>
+                <button className="delete-button" id="Delete">
+                  Slett
+                </button>
+              </>
+            )}
         </div>
         <div className="tags-ratings-container">
           <div className="tags">
@@ -170,5 +171,4 @@ export default function DestinationDetailed() {
       <h2 className="sub-header">Kommentarer</h2>
     </div>
   );
-  
 }

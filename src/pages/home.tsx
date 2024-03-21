@@ -3,17 +3,38 @@ import SubHeader from "../components/SubHeader";
 import "../css/Main.css";
 import { getAllDestinations } from "../controllers/fierbaseController";
 import { DestinationProps } from "../components/GalleryDestination";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import { useNavigate } from "react-router";
 import NavBar from "../components/NavBar";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Home() {
   const [destinations, setDestinations] = useState<DestinationProps[]>([]);
+  const [recommended, setRecommended] = useState<DestinationProps[]>([]);
+  const currentUser = useContext(AuthContext)?.user;
 
   useEffect(() => {
-    fetchAndSetData();
+    const fetchData = async () => {
+      await fetchAndSetData();
+      const favoriteTags = currentUser ? currentUser.tags : [];
+      const newRecommended = await getRecommendedDestinations(favoriteTags);
+      setRecommended(newRecommended);
+    };
+
+    fetchData();
   }, []);
+
+  const getRecommendedDestinations = async (tags: string[]) => {
+    const filteredDestinations = (await getAllDestinations()).filter(
+      (destination) => {
+        return (
+          tags.filter((tag) => !destination.tags.includes(tag)).length == 0
+        );
+      }
+    );
+    return filteredDestinations;
+  };
 
   const fetchAndSetData = async () => {
     const destinations = await getAllDestinations();
@@ -48,14 +69,18 @@ export default function Home() {
           neverShowArrows={false}
         />{" "}
       </div>
-      <SubHeader string="Vi anbefaler" />
-      <div className="mainDestination">
-        <MainGallery
-          destinations={destinations}
-          handleTileClicked={handleDestinationTileClicked}
-          neverShowArrows={false}
-        />{" "}
-      </div>
+      {currentUser?.loggedIn && (
+        <>
+          <SubHeader string="Vi anbefaler" />
+          <div className="mainDestination">
+            <MainGallery
+              destinations={recommended}
+              handleTileClicked={handleDestinationTileClicked}
+              neverShowArrows={false}
+            />{" "}
+          </div>
+        </>
+      )}
     </div>
   );
 }

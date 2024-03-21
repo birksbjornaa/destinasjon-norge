@@ -23,7 +23,6 @@ export default function DestinationChooser() {
   const applyFilters = async (tags: string[], price: number) => {
     const filteredDestinations = (await getAllDestinations()).filter(
       (destination) => {
-        console.log(destination.tags);
         return (
           destination.price <= price &&
           tags.filter((tag) => !destination.tags.includes(tag)).length == 0
@@ -47,7 +46,7 @@ export default function DestinationChooser() {
   return (
     <div>
       <NavBar handleLogoHomeClicked={goToHomePage} />
-      <FilteringBar applyFilters={applyFilters} showSlider={true}/>
+      <FilteringBar applyFilters={applyFilters} showSlider={true} />
 
       <DestinationsOverview
         destinations={destinations}

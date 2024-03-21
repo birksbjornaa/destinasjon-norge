@@ -1,20 +1,29 @@
 import { collection } from "@firebase/firestore";
-import { doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import {
+  query,
+  where,
+  addDoc,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
 
 const usersCollection = collection(db, "Users");
 
 export interface UserData {
-  token: string;
+  id: string;
   email: string;
   role: string;
+  tags: string[];
 }
 
 export function createMissingData(): UserData {
   return {
-    token: "missing",
+    id: "missing",
     email: "missing",
     role: "missing",
+    tags: [],
   };
 }
 
@@ -22,9 +31,10 @@ export async function getAllUsers(): Promise<UserData[]> {
   try {
     const snapshot = await getDocs(usersCollection);
     return snapshot.docs.map((doc) => ({
-      token: doc.data().token as string,
+      id: doc.id as string,
       email: doc.data().email as string,
-      role: doc.data().role as string
+      role: doc.data().role as string,
+      tags: doc.data().role as string[],
     }));
   } catch (error) {
     console.error("Error getting users: ", error);
@@ -32,79 +42,65 @@ export async function getAllUsers(): Promise<UserData[]> {
   }
 }
 
-export async function getAllTokens(): Promise<string[]> {
-  const allUsers: Array<UserData> = await getAllUsers();
-  const tokens: string[] = [];
-
-  allUsers.forEach(user => {
-    tokens.push(user.token);
-  });
-
-  return tokens;
-}
-
-export async function checkIfUserIsAdmin(currentToken: String) {
-  const userSnapshot = await getDocs(usersCollection);
-  const users = userSnapshot.docs.map(doc => doc.data());
-
+export async function hasUser(email: string) {
+  const users = await getAllUsers();
   for (let user of users) {
-    if (user.token === currentToken) {
-      const docRef = doc(db, "Users", user.token);
-      const snapshot = await getDoc(docRef);
-      const snapData = snapshot.data();
-      if (snapData && snapData.role === "admin") {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  }
-  return false;
-}
-
-export async function checkIfUserInDatabase(currentToken: string) {
-  const userSnapshot = await getDocs(usersCollection);
-  const users = userSnapshot.docs.map(doc => doc.data());
-
-  for (let user of users) {
-    if (user.token === currentToken) {
+    if (user.email === email) {
       return true;
     }
   }
   return false;
 }
 
-export async function getUser(currentToken: string, currentEmail: string) {
-  const userSnapshot = await getDocs(usersCollection);
-  const users = userSnapshot.docs.map(doc => doc.data());
+export async function getUser(email: string): Promise<UserData | null> {
+  const usersCollection = collection(db, "Users");
+  const q = query(usersCollection, where("email", "==", email));
 
-  if(await checkIfUserInDatabase(currentToken)){
-    for (let user of users) {
-      if (user.token === currentToken) {
-        const docRef = doc(db, "Users", user.token);
-        const snapshot = await getDoc(docRef);
-        const snapData = snapshot.data();
-        if (snapData) {
-          return(
-            {
-              token: snapData.token as string,
-              email: snapData.email as string,
-              role: snapData.role as string
-            }
-          )
-        }
-      }
+  try {
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) {
+      return null;
     }
-  } else {
-    const newUser = {
-      token: currentToken,
-      email: currentEmail,
-      role: "user"
+
+    const doc = snapshot.docs[0];
+    return {
+      id: doc.id,
+      email: doc.data().email,
+      role: doc.data().role,
+      tags: doc.data().tags,
     };
-    await setDoc(doc(db, "Users", currentToken), newUser);
-    
+  } catch (error) {
+    console.error("Error getting user by email: ", error);
+    return null;
   }
 }
 
-// Må lage en funksjon som lagrer tags til profilen
-// export default function saveTagsToProfile(token: string,)
+export async function createNewUser(email: string) {
+  try {
+    const newUser = {
+      email: email,
+      role: "user",
+      tags: [],
+    };
+    await addDoc(usersCollection, newUser);
+    return true;
+  } catch (e) {
+    console.error("Error adding user: ", e);
+    return false;
+  }
+}
+
+export async function updateProfileTags(user: UserData, newTags: string[]) {
+  try {
+    const updatedUser = {
+      tags: newTags,
+    };
+
+    await updateDoc(doc(db, "Users", user.id), updatedUser);
+
+    return true; // Updated OK
+  } catch (e) {
+    console.error("Error editing document (destination): ", e);
+    return false; // Somthing wrong
+  }
+}

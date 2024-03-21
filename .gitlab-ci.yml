@@ -1,4 +1,8 @@
 image: node:latest
+cache:
+  paths:
+    - node_modules/
+
 stages:
   - build
   - test
@@ -13,6 +17,8 @@ build-job:
 unit-test-job:
   stage: test
   script:
+    - echo "Installing vitest if not already installed..."
+    - npm list vitest || npm install vitest
     - echo "Running tests with npm..."
     - npm run test
     - echo "Tests completed."

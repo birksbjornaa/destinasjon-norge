@@ -14,10 +14,15 @@ import NavBar from "../components/NavBar";
 import DeleteButton from "../components/DeleteButton"; // Import the DeleteButton component
 import { AuthContext } from "../context/AuthContext";
 
+// Til når vi skal koble sammen med en bruker, og til destination
+export let starsRated: number = 0;
+
 export default function DestinationDetailed() {
   const [destination, setDestination] = useState(createMissingData());
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [isVisited, setIsVisited] = useState<boolean>(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [rating, setRating] = useState<number>(0);
 
   useEffect(() => {
     fetchAndSetData();
@@ -38,6 +43,11 @@ export default function DestinationDetailed() {
   const toggleLike2 = () => {
     setIsVisited((prevIsVisited) => !prevIsVisited);
   };
+
+  const handleStarClick = (starNumber: number) => {
+      setRating(starNumber === rating ? 0 : starNumber);
+      starsRated = starNumber;
+    };
 
   const handleDelete = async () => {
     try {
@@ -121,7 +131,26 @@ export default function DestinationDetailed() {
               </ul>
             ))}
           </div>
-          <div className="ratings">Vurdering: 3.75/5</div>
+          <div className="ratings">
+            {/* Legg inn logikk til vurdering */}
+            <p>Vurdering: 3.75/5</p>
+            <p>Din vurdering:
+              <br></br>
+              {[1, 2, 3, 4, 5].map((starNumber) => (
+                <span
+                  key={starNumber}
+                  style={{
+                    fontSize: '24px',
+                    cursor: 'pointer',
+                    color: starNumber <= rating ? 'gold' : '#D3D3D3',
+                  }}
+                  onClick={() => handleStarClick(starNumber)}
+                >
+                  ★
+                </span>
+              ))}
+            </p>
+          </div>
         </div>
         <h2 className="sub-header">Beskrivelse</h2>
         <p id="textbeskrivelse" className="text">

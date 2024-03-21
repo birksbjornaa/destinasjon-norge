@@ -82,33 +82,44 @@ body {
   position: absolute;
   top: 130px;
   right: 30px;
+}
+
+.favorite {
+  width: 25px;
+  height: 25px;
+}
+
+.visited-button {
+  background: none;
+  border: 1px solid white;
+  padding: 5px 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 180px;
+  right: 30px;
   }
 
-  .favorite {
-    width: 25px;
-    height: 25px;
-  }
+.visited {
+  width: 25px;
+  height: 25px;
+}
 
-  .visited-button {
-    background: none;
-    border: 1px solid white;
-    padding: 5px 10px;
-    cursor: pointer;
-    position: absolute;
-    top: 180px;
-    right: 30px;
-    }
-  
-    .visited {
-      width: 25px;
-      height: 25px;
-    }
-  .tags ul {
-    list-style-type: none;
-    padding: 0;
-    margin-right: 10px;
-  }
-  .tags li {
-      display: inline-block;
-    }
-  
+.tags ul {
+  list-style-type: none;
+  padding: 0;
+  margin-right: 10px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.tags li {
+    display: inline-block;
+}
+
+body {
+  /* font-family: monospace; */
+  color: rgb(70, 75, 70);
+}
+p {
+  font-size: 15px;
+}

@@ -1,19 +1,18 @@
 image: node:latest
-stages:          
+stages:
   - build
   - test
 
-build-job:       
+build-job:
   stage: build
   script:
     - echo "Installing dependencies..."
-    - npm ci        
+    - npm ci
     - echo "Dependencies installed."
 
-unit-test-job:   
-  stage: test   
+unit-test-job:
+  stage: test
   script:
     - echo "Running tests with npm..."
-    - npm run start   
+    - npm run test
     - echo "Tests completed."
-

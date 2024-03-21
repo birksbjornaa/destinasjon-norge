@@ -2,7 +2,7 @@
 
 Many individuals in Norway want to travel domestically, but feel overwhelmed due to the oveload of information online. The goal of the project is therefore to create a website that categorizes different destinations in Norway based on its activities and attractions. Users will be able to easily filter destinations based on their interests and preferences, making it easier to choose. There will also be support for creating your own profile, making it possible to review, wishlist and mark already visited destinations. All features and user stories are based on communication with the product owner.
 
-![](./.pictures/destinasjon-norge.gif) 
+![](./.pictures/destinasjon-norge.gif)
 
 ## Table of content 📚
 
@@ -15,7 +15,7 @@ Many individuals in Norway want to travel domestically, but feel overwhelmed due
 
 ## Key features
 
-- Destinations can be "liked", which influences recommendations on the home-page. 
+- Destinations can be "liked", which influences recommendations on the home-page.
 
 - Destinations can be "marked", which shows up on the profile-page
 

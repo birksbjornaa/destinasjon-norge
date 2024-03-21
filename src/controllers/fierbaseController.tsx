@@ -82,25 +82,21 @@ export async function getDestination(id: string): Promise<DestinationData> {
 }
 
 export async function postNewDestination(newDestination: DestinationData) {
-  try {
-    const newDestinationFormated = {
-      navn: newDestination.name as string,
-      bilde: newDestination.imageSrc as string,
-      fylke: newDestination.region as string,
-      beskrivelse: newDestination.description as string,
-      prisnivaa: newDestination.price as number,
-      tags: newDestination.tags as string[],
-      yrid: newDestination.yrid as string,
-    };
+  const newDestinationFormated = {
+    navn: newDestination.name as string,
+    bilde: newDestination.imageSrc as string,
+    fylke: newDestination.region as string,
+    beskrivelse: newDestination.description as string,
+    prisnivaa: newDestination.price as number,
+    tags: newDestination.tags as string[],
+    yrid: newDestination.yrid as string,
+  };
 
-    const docRef = await addDoc(
-      collection(db, "Destination"),
-      newDestinationFormated
-    );
-    return docRef.id;
-  } catch (e) {
-    console.error("Error adding document (destination): ", e);
-  }
+  const docRef = await addDoc(
+    collection(db, "Destination"),
+    newDestinationFormated
+  );
+  return docRef.id;
 }
 
 // TODO: Rename fierbase fierstore attributes to english (to match the rest of project)

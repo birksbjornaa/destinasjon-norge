@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import Form from "../components/Form";
+import Form from "../components/CreateForm";
 import { expect } from "vitest";
 
 /*
@@ -52,6 +52,8 @@ describe("Create a valid destination", () => {
 
     fireEvent.click(submitButton);
     expect(screen.getByTestId("error-message-text")).toHaveTextContent("");
+    // To debug:
+    //screen.debug();
   });
 });
 
